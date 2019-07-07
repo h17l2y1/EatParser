@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser", "EatParser\EatParser.csproj", "{A760CC7B-F599-4C69-99CD-99E0E24E25F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser.ViewModels", "EatParser.ViewModels\EatParser.ViewModels.csproj", "{3099E32F-58B9-4315-822B-84236D3F838C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser.Services", "EatParser.Services\EatParser.Services.csproj", "{228E916A-07E9-48F5-8587-C8557C99DB68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser.Api", "EatParser.Api\EatParser.Api.csproj", "{F6AA1617-1A88-4142-AE1E-12058EFF09E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser.Entities", "EatParser.Entities\EatParser.Entities.csproj", "{218340FD-74A3-4975-BD6F-61E68C8961E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser.DataAccess", "EatParser.DataAccess\EatParser.DataAccess.csproj", "{0785D84F-098E-4654-8103-C899F859529A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A760CC7B-F599-4C69-99CD-99E0E24E25F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A760CC7B-F599-4C69-99CD-99E0E24E25F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A760CC7B-F599-4C69-99CD-99E0E24E25F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A760CC7B-F599-4C69-99CD-99E0E24E25F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3099E32F-58B9-4315-822B-84236D3F838C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3099E32F-58B9-4315-822B-84236D3F838C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3099E32F-58B9-4315-822B-84236D3F838C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3099E32F-58B9-4315-822B-84236D3F838C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{228E916A-07E9-48F5-8587-C8557C99DB68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{228E916A-07E9-48F5-8587-C8557C99DB68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{228E916A-07E9-48F5-8587-C8557C99DB68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{228E916A-07E9-48F5-8587-C8557C99DB68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6AA1617-1A88-4142-AE1E-12058EFF09E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6AA1617-1A88-4142-AE1E-12058EFF09E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6AA1617-1A88-4142-AE1E-12058EFF09E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6AA1617-1A88-4142-AE1E-12058EFF09E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{218340FD-74A3-4975-BD6F-61E68C8961E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218340FD-74A3-4975-BD6F-61E68C8961E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218340FD-74A3-4975-BD6F-61E68C8961E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218340FD-74A3-4975-BD6F-61E68C8961E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0785D84F-098E-4654-8103-C899F859529A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0785D84F-098E-4654-8103-C899F859529A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0785D84F-098E-4654-8103-C899F859529A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0785D84F-098E-4654-8103-C899F859529A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

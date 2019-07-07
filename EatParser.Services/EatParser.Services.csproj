@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EatParser.DataAccess\EatParser.DataAccess.csproj" />
+    <ProjectReference Include="..\EatParser.ViewModels\EatParser.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

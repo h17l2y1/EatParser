@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EatParser.Controllers
+namespace EatParser.Api.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
