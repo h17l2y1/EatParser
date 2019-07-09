@@ -5,8 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.12.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EatParser.DataAccess\EatParser.DataAccess.csproj" />
     <ProjectReference Include="..\EatParser.ViewModels\EatParser.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
