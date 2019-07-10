@@ -1,5 +1,6 @@
 ﻿
 using System.Threading.Tasks;
+using EatParser.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EatParser.Api.Controllers
@@ -8,18 +9,25 @@ namespace EatParser.Api.Controllers
 	[ApiController]
 	public class TestController : ControllerBase
 	{
-		private readonly IService _service;
+		private readonly ITestService _service;
 
-		public TestController(IService service)
+		public TestController(ITestService service)
 		{
 			_service = service;
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> StartGame(string prop1, string prop2)
+		[HttpGet("{id}")]
+		public ActionResult<string> Get(int id)
 		{
-			var view = await _service.Start(prop1, prop2);
+			return "value";
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Get(string restaurant)
+		{
+			var view = await _service.Get(restaurant);
 			return Ok(view);
 		}
+
 	}
 }
