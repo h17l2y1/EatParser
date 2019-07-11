@@ -1,15 +1,23 @@
 ﻿
 namespace Parser.Core.Habra
 {
-    class HabraSettings : IParserSettings
+    class HabraSettings : IHabraSettings
     {
-        public HabraSettings(int start, int end)
+        public HabraSettings(string site, string prefix, int start, int end)
         {
-            StartPoint = start;
+			BaseUrl = site;
+			Prefix = prefix;
+			StartPoint = start;
             EndPoint = end;
         }
 
-        public string BaseUrl { get; set; } = "https://habrahabr.ru";
+		public HabraSettings(int start, int end)
+		{
+			StartPoint = start;
+			EndPoint = end;
+		}
+
+		public string BaseUrl { get; set; } = "https://habrahabr.ru";
 
         public string Prefix { get; set; } = "page{CurrentId}";
 

@@ -4,9 +4,9 @@ using AngleSharp.Html.Dom;
 
 namespace Parser.Core.Habra
 {
-    class HabraParser : IParser<string[]>
-    {
-		public string[] Parse(IHtmlDocument document)
+    public class HabraParser : IHabraParser
+	{
+		public List<string> Parse(IHtmlDocument document)
 		{
 			var list = new List<string>();
 			var items = document.QuerySelectorAll("a")
@@ -17,8 +17,7 @@ namespace Parser.Core.Habra
 				list.Add(item.TextContent);
 			}
 
-			var a = list.ToArray();
-			return a;
+			return list;
 		}
 	}
 }

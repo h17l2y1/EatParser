@@ -1,28 +1,23 @@
-﻿using EatParser.Services.Interfaces;
-using Parser.Core;
-using Parser.Core.Habra;
+﻿using EatParser.Services.Core.Intefraces;
+using EatParser.Services.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Services
 {
 	public class TestService : ITestService
 	{
-		ParserWorker<string[]> parser;
+		private readonly IParserWorker _parser;
 
-		public TestService()
+		public TestService(IParserWorker parser)
 		{
-			parser = new ParserWorker<string[]>(
-					new HabraParser()
-				);
+			_parser = parser;
 		}
 
-		public async Task<string> Get(string str)
+		public async Task<List<string>> Get(string str)
 		{
-
-			parser.Settings = new HabraSettings(1, 2);
-			var result = await parser.Start();
-
-			return "Ok";
+			var result = await _parser.Start();
+			return result;
 		}
 
 

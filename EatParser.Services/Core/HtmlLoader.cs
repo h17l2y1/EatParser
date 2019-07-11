@@ -9,7 +9,7 @@ namespace Parser.Core
         readonly HttpClient client;
         readonly string url;
 
-        public HtmlLoader(IParserSettings settings)
+        public HtmlLoader(IHabraSettings settings)
         {
             client = new HttpClient();
             url = $"{settings.BaseUrl}/{settings.Prefix}/";
@@ -18,13 +18,13 @@ namespace Parser.Core
         public async Task<string> GetSourceByPageId(int id)
         {
             var currentUrl = url.Replace("{CurrentId}", id.ToString());
-            var response = await client.GetAsync(currentUrl);
+            var response = await client.GetAsync("https://habrahabr.ru/page1/");
             string source = null;
 
             if(response != null && response.StatusCode == HttpStatusCode.OK)
             {
                 source = await response.Content.ReadAsStringAsync();
-            }
+			}
 
             return source;
         }

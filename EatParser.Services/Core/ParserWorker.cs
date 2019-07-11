@@ -1,53 +1,41 @@
 ﻿using AngleSharp.Html.Parser;
-using System;
+using EatParser.Services.Core.Intefraces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Parser.Core
 {
-    class ParserWorker<T> where T : class
-    {
-		private readonly IParser<T> _iParser;
-		public ParserWorker(IParser<T> parser)
+	public class ParserWorker : IParserWorker
+	{
+		private readonly IHabraParser _hParser;
+
+		public ParserWorker(IHabraParser hParser)
 		{
-			_iParser = parser;
+			_hParser = hParser;
 		}
 
-        IParserSettings parserSettings;
+		public async Task<List<string>> Start()
+		{
+			var domParser = new HtmlParser();
 
-        HtmlLoader loader;
+			var source = await GetSourceByPageId();
+			var document = await domParser.ParseDocumentAsync(source);
+			var result = _hParser.Parse(document);
 
+			return result;
+		}
 
-        public IParserSettings Settings
-        {
-            get { return parserSettings; }
-            set
-            {
-                parserSettings = value;
-                loader = new HtmlLoader(value);
-            }
-        }
+		private async Task<string> GetSourceByPageId()
+		{
+			var client = new HttpClient();
+			var response = await client.GetAsync("https://habrahabr.ru/page1/");
+			string source = await response.Content.ReadAsStringAsync();
 
-        public ParserWorker(IParser<T> parser, IParserSettings parserSettings) : this(parser)
-        {
-            this.parserSettings = parserSettings;
-        }
-
-        public async Task<object> Start()
-        {
-            for(int i = parserSettings.StartPoint; i <= parserSettings.EndPoint; i++)
-            {
-                var source = await loader.GetSourceByPageId(i);
-                var domParser = new HtmlParser();
-                var document = await domParser.ParseDocumentAsync(source);
-
-                return _iParser.Parse(document);
-            }
-			return null;
-        }
+			return source;
+		}
 
 
-    }
+	}
+
 }
