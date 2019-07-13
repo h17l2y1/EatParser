@@ -36,6 +36,7 @@ namespace EatParser.Services.Config
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
 
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();
+			services.AddScoped<IYaposhkaHelper, YaposhkaHelper>();
 
 		}
 

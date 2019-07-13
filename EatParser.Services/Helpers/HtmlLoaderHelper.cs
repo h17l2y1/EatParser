@@ -25,12 +25,12 @@ namespace EatParser.Services.Helpers
 			//var response = await client.GetAsync(url);
 			//string source = null;
 
-			var source = await aaa(url);
+			var source = await GetaPageSource(url);
 			var document = await domParser.ParseDocumentAsync(source);
 			return document;
 		}
 
-		private async Task<string> aaa(string url)
+		private async Task<string> GetaPageSource(string url)
 		{
 			var response = await client.GetAsync(url);
 			string source = null;
