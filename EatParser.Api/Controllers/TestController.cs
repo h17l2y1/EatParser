@@ -1,6 +1,6 @@
 ﻿
 using System.Threading.Tasks;
-using EatParser.Services.Interfaces;
+using EatParser.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EatParser.Api.Controllers

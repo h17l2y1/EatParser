@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EatParser.Services.Interfaces
+namespace EatParser.Services.Services.Interfaces
 {
 	public interface ITestService
 	{
