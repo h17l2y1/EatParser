@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EatParser.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +6,11 @@ namespace EatParser.Api.Controllers
 {
 	[Route("api/[controller]/[action]")]
 	[ApiController]
-	public class TestController : ControllerBase
+	public class YaposhkaController : ControllerBase
 	{
-		private readonly ITestService _service;
+		private readonly IYaposhkaService _service;
 
-		public TestController(ITestService service)
+		public YaposhkaController(IYaposhkaService service)
 		{
 			_service = service;
 		}
@@ -25,7 +24,7 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Get(string restaurant)
 		{
-			var view = await _service.Get(restaurant);
+			var view = await _service.GetYaposhkaSets(restaurant);
 			return Ok(view);
 		}
 

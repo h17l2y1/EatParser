@@ -14,29 +14,28 @@ namespace EatParser.Services.Config
 	{
 		public static void InjectBusinessLogicDependency(this IServiceCollection services, IConfiguration сonfiguration)
 		{
-			// Automapper setup
-			//var config = new AutoMapper.MapperConfiguration(c =>
-			//{
-			//	c.AddProfile(new EntityViewProfile());
-			//});
-			//var mapper = config.CreateMapper();
-			//services.AddSingleton(mapper);
+			//Automapper setup
+			var config = new AutoMapper.MapperConfiguration(c =>
+			{
+				c.AddProfile(new MapperProfile());
+			});
+			var mapper = config.CreateMapper();
+			services.AddSingleton(mapper);
 
 			services.InjectDataAccessDependency(сonfiguration);
 
 
-			// <Interface, Service>();
-			services.AddScoped<ITestService, TestService>();
+			// Services;
+			services.AddScoped<IYaposhkaService, YaposhkaService>();
 
+			// Providers;
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
 
+			// Helpers;
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();
 			services.AddScoped<IYaposhkaHelper, YaposhkaHelper>();
 
 		}
 
 	}
-
-
-
 }
