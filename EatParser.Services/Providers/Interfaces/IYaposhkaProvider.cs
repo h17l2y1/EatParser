@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EatParser.Entities.Entities;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers.Interfaces
 {
 	public interface IYaposhkaProvider
 	{
-		void ggwp();
+		Task<List<SushiSet>> GetYaposhkaSets();
 	}
 }

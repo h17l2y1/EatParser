@@ -1,4 +1,4 @@
-﻿using EatParser.Services.Core.Intefraces;
+﻿using EatParser.Entities.Entities;
 using EatParser.Services.Providers.Interfaces;
 using EatParser.Services.Services.Interfaces;
 using System.Collections.Generic;
@@ -8,20 +8,17 @@ namespace EatParser.Services.Services
 {
 	public class TestService : ITestService
 	{
-		private readonly IParserWorker _parser;
 		private readonly IYaposhkaProvider _yaposhkaProvider;
 
-		public TestService(IParserWorker parser, IYaposhkaProvider yaposhkaProvider)
+		public TestService(IYaposhkaProvider yaposhkaProvider)
 		{
-			_parser = parser;
 			_yaposhkaProvider = yaposhkaProvider;
 		}
 
-		public async Task<List<string>> Get(string str)
+		public async Task<List<SushiSet>> Get(string str)
 		{
-			var result = await _parser.Start();
+			var result = await _yaposhkaProvider.GetYaposhkaSets();
 
-			_yaposhkaProvider.ggwp();
 			return result;
 		}
 

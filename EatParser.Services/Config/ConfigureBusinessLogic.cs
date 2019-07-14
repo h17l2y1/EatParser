@@ -2,9 +2,6 @@
 using EatParser.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Parser.Core;
-using Parser.Core.Habra;
-using EatParser.Services.Core.Intefraces;
 using EatParser.Services.Services.Interfaces;
 using EatParser.Services.Providers;
 using EatParser.Services.Providers.Interfaces;
@@ -30,8 +27,6 @@ namespace EatParser.Services.Config
 
 			// <Interface, Service>();
 			services.AddScoped<ITestService, TestService>();
-			services.AddScoped<IHabraParser, HabraParser>();
-			services.AddScoped<IParserWorker, ParserWorker>();
 
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
 

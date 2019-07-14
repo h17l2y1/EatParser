@@ -1,8 +1,11 @@
 ﻿using AngleSharp.Html.Parser;
+using EatParser.Entities.Entities;
 using EatParser.Services.Helpers.Interfaces;
 using EatParser.Services.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers
 {
@@ -21,32 +24,15 @@ namespace EatParser.Services.Providers
 			_yaposhka = yaposhka;
 		}
 
-		public async void ggwp()
+		public async Task<List<SushiSet>> GetYaposhkaSets()
 		{
 			var source = await _htmlLoaderHelper.GetPageSource(BaseUrl);
 			var document = await domParser.ParseDocumentAsync(source);
 
-			var result = _yaposhka.Parse(document);
-			var result2 = _yaposhka.Waight(document);
-			var result3 = _yaposhka.Count(document);
+			List<SushiSet> result = _yaposhka.Parse(document);
 
-			//return result;
+			return result;
 		}
 
-
-
-		//private List<string> Parse(IHtmlDocument document)
-		//{
-		//	var list = new List<string>();
-		//	var items = document.QuerySelectorAll("a")
-		//		.Where(item => item.ClassName != null && item.ClassName.Contains("brander-quickview product-name"));
-
-		//	foreach (var item in items)
-		//	{
-		//		list.Add(item.TextContent);
-		//	}
-
-		//	return list;
-		//}
 	}
 }
