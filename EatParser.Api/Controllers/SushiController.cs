@@ -6,11 +6,11 @@ namespace EatParser.Api.Controllers
 {
 	[Route("api/[controller]/[action]")]
 	[ApiController]
-	public class YaposhkaController : ControllerBase
+	public class SushiController : ControllerBase
 	{
-		private readonly IYaposhkaService _service;
+		private readonly ISushiService _service;
 
-		public YaposhkaController(IYaposhkaService service)
+		public SushiController(ISushiService service)
 		{
 			_service = service;
 		}

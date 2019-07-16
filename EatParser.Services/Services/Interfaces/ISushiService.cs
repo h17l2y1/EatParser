@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Services.Interfaces
 {
-	public interface IYaposhkaService
+	public interface ISushiService
 	{
 		Task<SushiSetView> GetYaposhkaSets(string str);
 
