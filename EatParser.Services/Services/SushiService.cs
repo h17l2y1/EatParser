@@ -22,8 +22,6 @@ namespace EatParser.Services.Services
 
 		public async Task<SushiSetView> GetYaposhkaSets(string str)
 		{
-			await GetMafiaSets(str);
-
 			var listEntity = await _yaposhkaProvider.GetYaposhkaSets();
 			var model = _mapper.Map<List<SetView>>(listEntity);
 			SushiSetView view = new SushiSetView(model);
@@ -33,9 +31,7 @@ namespace EatParser.Services.Services
 		public async Task<SushiSetView> GetMafiaSets(string str)
 		{
 			var listEntity = await _mafiaProvider.GetMafiaSets();
-
 			var model = _mapper.Map<List<SetView>>(listEntity);
-
 			SushiSetView view = new SushiSetView(model);
 
 			return view;

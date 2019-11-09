@@ -7,6 +7,7 @@ namespace EatParser.Services.Services.Interfaces
 	{
 		Task<SushiSetView> GetYaposhkaSets(string str);
 
+		Task<SushiSetView> GetMafiaSets(string str);
 
 	}
 }

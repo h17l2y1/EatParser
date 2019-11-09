@@ -3,9 +3,7 @@ using EatParser.Entities.Entities;
 using EatParser.Services.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace EatParser.Services.Helpers
@@ -14,67 +12,64 @@ namespace EatParser.Services.Helpers
 	{
 		public List<SushiSet> Parse(IDocument document)
 		{
-
 			List<string> names = GetNames(document);
-			//List<int> count = GetCount(document);
-			List<int> weight = GetWeight(document);
-			//List<string> images = GetImages(document);
-			//List<int> prices = GetPrice(document);
+			Set set = GetСountWeightData(document);
+			List<int> prices = GetPrice(document);
+			List<string> images = GetImages(document);
 
 			List<SushiSet> sets = Enumerable
 				.Range(0, names.Count)
 				.Select(i => new SushiSet
 				{
 					Name = names[i],
-					Weight = weight[i],
-					//Count = count[i],
-					//Price = prices[i],
-					//Image = images[i]
+					Weight = set.Weight[i],
+					Count = set.Count[i],
+					Price = prices[i],
+					Image = images[i]
 				})
 				.ToList();
 
-			return null;
+			return sets;
 		}
 
-		private List<int> GetWeight(IDocument document)
+		private Set GetСountWeightData(IDocument document)
 		{
-			// "40 шт., 1005 г"s
-
-			var weight = document.QuerySelectorAll("div")
-				.Where(item => item.ClassName != null && item.ClassName.Contains("product-weight"))
-				//.Select(i => Int32.Parse(i.TextContent.Trim().Substring(0, i.TextContent.Trim().Length - 2)))
-				//.Select(i => test(i))
-				//.Select(i => i.TextContent)
-				.ToList();
-
-
-			var weight2 = document.QuerySelectorAll("div")
+			IEnumerable<IElement> setData = document.QuerySelectorAll("div")
 				.Where(item => item.ClassName != null && item.ClassName.Contains("product-weight"));
 
+			Set countWeightList = GetSetsData(setData);
 
-			var a2 = test2(weight2);
-
-
-
-
-
-			return null;
+			return countWeightList;
 
 		}
 
-		private List<string[]> test2(IEnumerable<IElement> elem)
+		private Set GetSetsData(IEnumerable<IElement> elem)
 		{
-			var list = new List<string[]>();
+			var weigthList = new List<int>();
+			var countList = new List<int>();
 
 			foreach (var item in elem)
 			{
-				var str = Regex.Replace(item.TextContent, @"[^0-9$.]", "").Trim();
-				list.Add(str.Split(new char[] { '.' }));
+				string setString = Regex.Replace(item.TextContent, @"[^0-9$.]", "").Trim();
+
+				string[] setData = setString.Split(new char[] { '.' });
+
+				if (setData.Length < 2)
+				{
+					countList.Add(0);
+					weigthList.Add(Int32.Parse(setData[0]));
+				}
+				if (setData.Length > 1)
+				{
+					countList.Add(Int32.Parse(setData[0]));
+					weigthList.Add(Int32.Parse(setData[1]));
+				}
 			}
 
-			return list;
-		}
+			var set = new Set(countList, weigthList);
 
+			return set;
+		}
 
 		private List<string> GetNames(IDocument document)
 		{
@@ -86,15 +81,59 @@ namespace EatParser.Services.Helpers
 			return names;
 		}
 
-		//private List<string> GetImages(IDocument document)
-		//{
-		//	var images = document
-		//		.QuerySelectorAll("a")
-		//		.Where(item => item.ClassName == "product-img")
-		//		//.Select(m => m.GetAttribute("src"))
-		//		.ToList();
+		private List<int> GetPrice(IDocument document)
+		{
+			List<int> prices = document.QuerySelectorAll("span")
+				.Where(item => item.ClassName != null && item.ClassName.Contains("productPriceStatGA"))
+				.Select(i => PriceToInt(i))
+				.ToList();
 
-		//	return null;
-		//}
+			return prices;
+		}
+
+		private int PriceToInt(IElement elem)
+		{
+			string str = elem.TextContent.Trim();
+			if (str.Length > 0)
+			{
+				return Int32.Parse(str);
+			}
+			return 0;
+		}
+
+		private List<string> GetImages(IDocument document)
+		{
+			var imageList = document
+				.QuerySelectorAll("a")
+				.Where(item => item.ClassName == "product-img")
+				.Select(m => GetPath(m.Children.FirstOrDefault().OuterHtml))
+				.ToList();
+
+			return imageList;
+		}
+
+		private string GetPath(string outerHtmlString)
+		{
+			Regex regex = new Regex(@"\S*.jpeg");
+			MatchCollection matchColl = regex.Matches(outerHtmlString);
+			var path = matchColl[0].ToString().Remove(0, 6);
+			var fullPath = $"https://mafia.ua/{path}";
+			return fullPath;
+		}
+
+	}
+
+	public class Set
+	{
+
+		public List<int> Count { get; set; }
+		public List<int> Weight { get; set; }
+
+		public Set(List<int> count, List<int> weight)
+		{
+			Count = count;
+			Weight = weight;
+		}
+
 	}
 }
