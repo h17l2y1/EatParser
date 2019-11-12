@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EatParser.Entities", "EatPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EatParser.DataAccess", "EatParser.DataAccess\EatParser.DataAccess.csproj", "{0785D84F-098E-4654-8103-C899F859529A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatParser.Web.Angular", "EatParser.Web.Angular\EatParser.Web.Angular.csproj", "{6D179563-0029-4F7A-8336-68E5D6F34644}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0785D84F-098E-4654-8103-C899F859529A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0785D84F-098E-4654-8103-C899F859529A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0785D84F-098E-4654-8103-C899F859529A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D179563-0029-4F7A-8336-68E5D6F34644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D179563-0029-4F7A-8336-68E5D6F34644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D179563-0029-4F7A-8336-68E5D6F34644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D179563-0029-4F7A-8336-68E5D6F34644}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
