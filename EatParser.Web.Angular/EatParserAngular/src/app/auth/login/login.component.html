@@ -1,8 +1,15 @@
-<p>
-  login works!
-</p>
-
-
-<!-- <button routerLink="/login">login</button>
-<button routerLink="/menu">menu</button>
-<button routerLink="">Home</button> -->
+<div>
+  <form [formGroup]="loginForm">
+    <div>
+      <label>Login</label>
+      <input placeholder="login" type="text" formControlName="login">
+    </div>
+    <div>
+      <label>Password</label>
+      <input placeholder="password" type="text" formControlName="password">
+    </div>
+    <div>
+      <button type="submit" (click)="getLoginData()">Submit</button>
+    </div>
+  </form>
+</div>
