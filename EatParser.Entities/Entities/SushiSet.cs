@@ -1,6 +1,6 @@
 ﻿namespace EatParser.Entities.Entities
 {
-	public class SushiSet
+	public class SushiSet : BaseEntity
 	{
 		public string Name { get; set; }
 
