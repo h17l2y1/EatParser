@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignUpView } from 'src/app/shared/model/account/sign-up.view';
+import { AccountService } from 'src/app/shared/service/account.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public signUpModel: SignUpView;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private accountService: AccountService) { }
 
   ngOnInit() {
     this.initLoginForm();
@@ -25,8 +28,16 @@ export class LoginComponent implements OnInit {
   }
 
   public getLoginData(): void {
-    const aaa = this.loginForm.controls.login.value;
-    const bbb = this.loginForm.controls.password.value;
+    const loginModel = new SignUpView();
+    loginModel.login = this.loginForm.controls.login.value;
+    loginModel.password = this.loginForm.controls.password.value;
+    this.accountService.signUp(loginModel).subscribe();
+  }
+
+  public getSignUpData(): void {
+    const signUpModel = new SignUpView();
+    signUpModel.login = this.loginForm.controls.login.value;
+    signUpModel.password = this.loginForm.controls.password.value;
   }
 
 }

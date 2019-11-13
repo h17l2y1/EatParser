@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EatParser.Services.Config;
+﻿using EatParser.Services.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +20,20 @@ namespace EatParser.Api
 		{
 			services.InjectBusinessLogicDependency(Configuration);
 
+			//services.Configure<IdentityOptions>(options =>
+			//{
+			//	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+			//	options.Lockout.MaxFailedAccessAttempts = 5;
+			//	options.Lockout.AllowedForNewUsers = true;
+			//});
+
+			services.AddCors(o => o.AddPolicy("CorsPolicy", builder => {
+				builder
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+				.AllowCredentials()
+				.WithOrigins("http://localhost:4200");
+			}));
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
@@ -37,6 +48,8 @@ namespace EatParser.Api
 			{
 				app.UseHsts();
 			}
+
+			app.UseCors("CorsPolicy");
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
