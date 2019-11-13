@@ -1,13 +1,13 @@
 ﻿using EatParser.ViewModels.Account.Request;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using EatParser.ViewModels.Account.Response;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Services.Interfaces
 {
 	public interface IAccountService
 	{
-		Task SignUpAsync(SignUpAccountView view);
+		Task SignUp(SignUpAccountView view);
+
+		Task<JwtView> Login(LoginAccountView view);
 	}
 }

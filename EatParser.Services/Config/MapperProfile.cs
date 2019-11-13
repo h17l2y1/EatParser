@@ -16,6 +16,9 @@ namespace EatParser.Services.Config
 				.ForMember(from => from.UserName, to => to.MapFrom(source => source.Login))
 				.ForMember(from => from.Password, to => to.MapFrom(source => source.Password));
 
+			CreateMap<LoginAccountView, User>()
+				.ForMember(from => from.UserName, to => to.MapFrom(source => source.Login))
+				.ForMember(from => from.Password, to => to.MapFrom(source => source.Password));
 
 		}
 	}

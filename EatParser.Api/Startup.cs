@@ -20,13 +20,6 @@ namespace EatParser.Api
 		{
 			services.InjectBusinessLogicDependency(Configuration);
 
-			//services.Configure<IdentityOptions>(options =>
-			//{
-			//	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-			//	options.Lockout.MaxFailedAccessAttempts = 5;
-			//	options.Lockout.AllowedForNewUsers = true;
-			//});
-
 			services.AddCors(o => o.AddPolicy("CorsPolicy", builder => {
 				builder
 				.AllowAnyMethod()

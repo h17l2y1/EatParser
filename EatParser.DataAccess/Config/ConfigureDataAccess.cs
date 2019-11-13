@@ -1,7 +1,6 @@
 ﻿using EatParser.DataAccess.Repositories;
 using EatParser.DataAccess.Repositories.Interfaces;
 using EatParser.Entities.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,9 +20,6 @@ namespace EatParser.DataAccess.Config
 
 			//services.AddDbContext<ApplicationContext>(options =>
 			//	options.UseSqlServer(configuration.GetConnectionString(ApplicationConstants.CONNECTION_STRING_NAME)));
-
-			// EF6
-			//services.AddScoped<Interface, Repository>();
 
 
 			// Dapper
