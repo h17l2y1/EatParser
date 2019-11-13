@@ -1,5 +1,6 @@
 ﻿using EatParser.Entities.Entities;
 using EatParser.ViewModels;
+using EatParser.ViewModels.Account.Request;
 
 namespace EatParser.Services.Config
 {
@@ -7,7 +8,14 @@ namespace EatParser.Services.Config
 	{
 		public MapperProfile()
 		{
-			CreateMap<SushiSet, SetView>().ReverseMap();
+
+			CreateMap<SushiSet, SetView>();
+
+
+			CreateMap<SignUpAccountView, User>()
+				.ForMember(from => from.UserName, to => to.MapFrom(source => source.Login))
+				.ForMember(from => from.Password, to => to.MapFrom(source => source.Password));
+
 
 		}
 	}

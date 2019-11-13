@@ -27,6 +27,7 @@ namespace EatParser.Services.Config
 
 			// Services;
 			services.AddScoped<ISushiService, SushiService>();
+			services.AddScoped<IAccountService, AccountService>();
 
 			// Providers;
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
