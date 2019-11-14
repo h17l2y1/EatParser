@@ -10,7 +10,7 @@ namespace EatParser.Services.Config
 		public int LifeTime { get; set; }
 
 		public int JwtExpireMinutes { get; set; }
-		public TimeSpan AccessTokenExpiration { get; set; } = TimeSpan.FromMinutes(10);
+		public TimeSpan AccessTokenExpiration { get; set; } = TimeSpan.FromDays(7);
 		public TimeSpan RefreshTokenExpiration { get; set; } = TimeSpan.FromDays(60);
 	}
 }

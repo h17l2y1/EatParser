@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpView } from 'src/app/shared/model/account/sign-up.view';
 import { AccountService } from 'src/app/shared/service/account.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public signUpModel: SignUpView;
 
-  constructor(private router: Router, private accountService: AccountService) { }
+  constructor(private router: Router, private accountService: AccountService, private authService: AuthService) { }
 
   ngOnInit() {
     this.initLoginForm();
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     loginModel.login = this.loginForm.controls.login.value;
     loginModel.password = this.loginForm.controls.password.value;
     this.accountService.login(loginModel).subscribe(response => {
-      const a = response;
+      this.authService.setJwt(response);
+      this.router.navigate(['/menu']);
     });
   }
 
@@ -41,7 +43,8 @@ export class LoginComponent implements OnInit {
     signUpModel.login = this.loginForm.controls.login.value;
     signUpModel.password = this.loginForm.controls.password.value;
     this.accountService.signUp(signUpModel).subscribe(response => {
-      const a = response;
+      this.authService.setJwt(response);
+      this.router.navigate(['/menu']);
     });
   }
 

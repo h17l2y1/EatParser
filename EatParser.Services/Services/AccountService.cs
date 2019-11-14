@@ -33,13 +33,9 @@ namespace EatParser.Services.Services
 		public async Task<JwtView> Login(LoginAccountView view)
 		{
 			User user = _mapper.Map<LoginAccountView, User>(view);
-			var token = _jwtProvider.CreateToken(user);
+			JwtView token = _jwtProvider.CreateToken(user);
 
-
-
-
-
-			return null;
+			return token;
 		}
 
 	}
