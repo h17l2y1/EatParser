@@ -51,9 +51,7 @@ namespace EatParser.Services.Providers
 			return new JwtView()
 			{
 				AccessToken = encodedAccess,
-				RefreshToken = encodedRefresh,
-				UserRole = "User",
-				UserName = user.UserName,
+				RefreshToken = encodedRefresh
 			};
 		}
 

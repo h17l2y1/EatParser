@@ -14,7 +14,11 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   public signUp(model: SignUpView): Observable<null> {
-    return this.http.post<null>(this.apiControllerURL + `/Account/SignUp`, model);
+    return this.http.post<null>(this.apiControllerURL + `Account/SignUp`, model);
+  }
+
+  public login(model: SignUpView): Observable<any> {
+    return this.http.post<any>(this.apiControllerURL + `Account/Login`, model);
   }
 
 }

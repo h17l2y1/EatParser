@@ -31,13 +31,18 @@ export class LoginComponent implements OnInit {
     const loginModel = new SignUpView();
     loginModel.login = this.loginForm.controls.login.value;
     loginModel.password = this.loginForm.controls.password.value;
-    this.accountService.signUp(loginModel).subscribe();
+    this.accountService.login(loginModel).subscribe(response => {
+      const a = response;
+    });
   }
 
   public getSignUpData(): void {
     const signUpModel = new SignUpView();
     signUpModel.login = this.loginForm.controls.login.value;
     signUpModel.password = this.loginForm.controls.password.value;
+    this.accountService.signUp(signUpModel).subscribe(response => {
+      const a = response;
+    });
   }
 
 }

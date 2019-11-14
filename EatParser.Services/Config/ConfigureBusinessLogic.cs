@@ -32,6 +32,7 @@ namespace EatParser.Services.Config
 			// Providers;
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
 			services.AddScoped<IMafiaProvider, MafiaProvider>();
+			services.AddScoped<IJwtProvider, JwtProvider>();
 
 			// Helpers;
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();

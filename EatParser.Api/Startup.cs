@@ -1,4 +1,5 @@
-﻿using EatParser.Services.Config;
+﻿using EatParser.Api.Extension;
+using EatParser.Services.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,8 @@ namespace EatParser.Api
 		{
 			services.InjectBusinessLogicDependency(Configuration);
 
-			services.AddCors(o => o.AddPolicy("CorsPolicy", builder => {
-				builder
-				.AllowAnyMethod()
-				.AllowAnyHeader()
-				.AllowCredentials()
-				.WithOrigins("http://localhost:4200");
-			}));
+			AuthenticationExtension.Add(services, Configuration);
+			CorsExtension.Add(services);
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
@@ -42,7 +38,7 @@ namespace EatParser.Api
 				app.UseHsts();
 			}
 
-			app.UseCors("CorsPolicy");
+			app.UseCors("AllowAllPolicy");
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
