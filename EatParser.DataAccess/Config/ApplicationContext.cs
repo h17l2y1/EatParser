@@ -12,7 +12,9 @@ namespace EatParser.DataAccess.Config
 
 		public string DefaultConnection { get; set; }
 
-		public DbSet<SushiSet> SushiSets { get; set; }
+		public DbSet<RolSet> RolSets { get; set; }
+
+		public DbSet<Restaurant> Restaurants { get; set; }
 
 
 	}

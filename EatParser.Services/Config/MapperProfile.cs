@@ -9,7 +9,7 @@ namespace EatParser.Services.Config
 		public MapperProfile()
 		{
 
-			CreateMap<SushiSet, SetView>();
+			CreateMap<RolSet, SetView>();
 
 
 			CreateMap<SignUpAccountView, User>()

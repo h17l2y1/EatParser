@@ -10,16 +10,16 @@ namespace EatParser.Services.Helpers
 {
 	public class MafiaHelper : IMafiaHelper
 	{
-		public List<SushiSet> Parse(IDocument document)
+		public List<RolSet> Parse(IDocument document)
 		{
 			List<string> names = GetNames(document);
 			Set set = GetСountWeightData(document);
 			List<int> prices = GetPrice(document);
 			List<string> images = GetImages(document);
 
-			List<SushiSet> sets = Enumerable
+			List<RolSet> sets = Enumerable
 				.Range(0, names.Count)
-				.Select(i => new SushiSet
+				.Select(i => new RolSet
 				{
 					Name = names[i],
 					Weight = set.Weight[i],

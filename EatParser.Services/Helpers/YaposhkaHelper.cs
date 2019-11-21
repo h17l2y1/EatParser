@@ -9,7 +9,7 @@ namespace EatParser.Services.Helpers
 {
 	public class YaposhkaHelper : IYaposhkaHelper
 	{
-		public List<SushiSet> Parse(IDocument document)
+		public List<RolSet> Parse(IDocument document)
 		{
 			List<string> names = GetNames(document);
 			List<int> count = GetCount(document);
@@ -17,9 +17,9 @@ namespace EatParser.Services.Helpers
 			List<string> images = GetImages(document);
 			List<int> prices = GetPrice(document);
 
-			List<SushiSet> sets = Enumerable
+			List<RolSet> sets = Enumerable
 				.Range(0, names.Count)
-				.Select(i => new SushiSet
+				.Select(i => new RolSet
 				{
 					Name = names[i],
 					Weight = weight[i],

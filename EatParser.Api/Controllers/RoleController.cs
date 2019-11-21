@@ -6,11 +6,11 @@ namespace EatParser.Api.Controllers
 {
 	[Route("api/[controller]/[action]")]
 	[ApiController]
-	public class SushiController : ControllerBase
+	public class RoleController : ControllerBase
 	{
-		private readonly ISushiService _service;
+		private readonly IRoleService _service;
 
-		public SushiController(ISushiService service)
+		public RoleController(IRoleService service)
 		{
 			_service = service;
 		}
@@ -22,12 +22,17 @@ namespace EatParser.Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Get(string restaurant)
+		public async Task<IActionResult> GetByRestaurant(string restaurant)
 		{
 			var view = await _service.GetMafiaSets(restaurant);
 			return Ok(view);
 		}
 
+		[HttpGet]
+		public ActionResult<string> GetAll()
+		{
+			return "value";
+		}
 
 	}
 }

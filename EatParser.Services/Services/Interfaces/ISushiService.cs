@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Services.Interfaces
 {
-	public interface ISushiService
+	public interface IRoleService
 	{
-		Task<SushiSetView> GetYaposhkaSets(string str);
+		Task<RolSetView> GetYaposhkaSets(string str);
 
-		Task<SushiSetView> GetMafiaSets(string str);
+		Task<RolSetView> GetMafiaSets(string str);
 
 	}
 }

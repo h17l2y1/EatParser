@@ -24,12 +24,12 @@ namespace EatParser.Services.Providers
 			_mafia = mafia;
 		}
 
-		public async Task<List<SushiSet>> GetMafiaSets()
+		public async Task<List<RolSet>> GetMafiaSets()
 		{
 			var source = await _htmlLoaderHelper.GetPageSource(BaseUrl);
 			var document = await domParser.ParseDocumentAsync(source);
 
-			List<SushiSet> result = _mafia.Parse(document);
+			List<RolSet> result = _mafia.Parse(document);
 
 			return result;
 		}

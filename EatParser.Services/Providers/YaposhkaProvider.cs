@@ -24,12 +24,12 @@ namespace EatParser.Services.Providers
 			_yaposhka = yaposhka;
 		}
 
-		public async Task<List<SushiSet>> GetYaposhkaSets()
+		public async Task<List<RolSet>> GetYaposhkaSets()
 		{
 			var source = await _htmlLoaderHelper.GetPageSource(BaseUrl);
 			var document = await domParser.ParseDocumentAsync(source);
 
-			List<SushiSet> result = _yaposhka.Parse(document);
+			List<RolSet> result = _yaposhka.Parse(document);
 
 			return result;
 		}

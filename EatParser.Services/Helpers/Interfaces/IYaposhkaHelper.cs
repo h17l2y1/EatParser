@@ -6,6 +6,6 @@ namespace EatParser.Services.Helpers.Interfaces
 {
 	public interface IYaposhkaHelper
 	{
-		List<SushiSet> Parse(IDocument document);
+		List<RolSet> Parse(IDocument document);
 	}
 }

@@ -6,7 +6,7 @@ namespace EatParser.Services.Helpers.Interfaces
 {
 	public interface IMafiaHelper
 	{
-		List<SushiSet> Parse(IDocument document);
+		List<RolSet> Parse(IDocument document);
 
 	}
 }
