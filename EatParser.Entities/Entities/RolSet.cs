@@ -1,4 +1,7 @@
-﻿namespace EatParser.Entities.Entities
+﻿using Dapper.Contrib.Extensions;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EatParser.Entities.Entities
 {
 	public class RolSet : BaseEntity
 	{
@@ -11,5 +14,12 @@
 		public int Price { get; set; }
 
 		public string Image { get; set; }
+
+		public int RestaurantId { get; set; }
+
+		[ForeignKey("RestaurantId")]
+		[NotMapped]
+		[Computed]
+		public virtual Restaurant Restaurant { get; set; }
 	}
 }

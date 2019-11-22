@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Html.Parser;
 using EatParser.Entities.Entities;
+using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;
 using EatParser.Services.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,7 @@ namespace EatParser.Services.Providers
 	public class MafiaProvider : BaseProvider, IMafiaProvider
 	{
 		protected readonly IMafiaHelper _mafia;
-		protected readonly string _site = "Mafia";
+		protected readonly string _site = RestaurantType.Mafia.ToString();
 
 		public MafiaProvider(IHtmlLoaderHelper htmlLoaderHelper, IConfiguration сonfiguration, IMafiaHelper mafia)
 			: base(htmlLoaderHelper, сonfiguration)

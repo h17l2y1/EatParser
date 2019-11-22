@@ -8,6 +8,7 @@ namespace EatParser.DataAccess.Config
 	{
 		public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
 		{
+			Database.Migrate();
 		}
 
 		public string DefaultConnection { get; set; }
@@ -16,7 +17,14 @@ namespace EatParser.DataAccess.Config
 
 		public DbSet<Restaurant> Restaurants { get; set; }
 
+		//protected override void OnModelCreating(ModelBuilder builder)
+		//{
+		//	var init = new AutoComplete();
 
+		//	builder.Entity<Restaurant>().HasData(init.CreateRestaurant().ToArray());
+
+		//	base.OnModelCreating(builder);
+		//}
 	}
 
 }
