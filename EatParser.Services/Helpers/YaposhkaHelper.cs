@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Dom;
 using EatParser.Entities.Entities;
+using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace EatParser.Services.Helpers
 					Weight = weight[i],
 					Count = count[i],
 					Price = prices[i],
-					Image = images[i]
+					Image = images[i],
+					RestaurantId = (int)RestaurantType.Yaposhka
 				})
 				.ToList();
 

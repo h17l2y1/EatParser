@@ -8,9 +8,9 @@ namespace EatParser.Api.Controllers
 	[ApiController]
 	public class RoleController : ControllerBase
 	{
-		private readonly IRoleService _service;
+		private readonly IGrabberService _service;
 
-		public RoleController(IRoleService service)
+		public RoleController(IGrabberService service)
 		{
 			_service = service;
 		}

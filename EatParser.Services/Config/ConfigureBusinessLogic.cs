@@ -26,7 +26,7 @@ namespace EatParser.Services.Config
 
 
 			// Services;
-			services.AddScoped<IRoleService, RolService>();
+			services.AddScoped<GrabberService, GrabberService>();
 			services.AddScoped<IAccountService, AccountService>();
 
 			// Providers;
