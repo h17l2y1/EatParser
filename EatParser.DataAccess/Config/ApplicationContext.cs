@@ -17,14 +17,14 @@ namespace EatParser.DataAccess.Config
 
 		public DbSet<Restaurant> Restaurants { get; set; }
 
-		//protected override void OnModelCreating(ModelBuilder builder)
-		//{
-		//	var init = new AutoComplete();
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			var init = new AutoComplete();
 
-		//	builder.Entity<Restaurant>().HasData(init.CreateRestaurant().ToArray());
+			builder.Entity<Restaurant>().HasData(init.CreateRestaurant().ToArray());
 
-		//	base.OnModelCreating(builder);
-		//}
+			base.OnModelCreating(builder);
+		}
 	}
 
 }

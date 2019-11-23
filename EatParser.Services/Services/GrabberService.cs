@@ -3,7 +3,6 @@ using EatParser.DataAccess.Repositories.Interfaces;
 using EatParser.Entities.Entities;
 using EatParser.Services.Providers.Interfaces;
 using EatParser.Services.Services.Interfaces;
-using EatParser.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,7 +23,7 @@ namespace EatParser.Services.Services
 			_roleSetRepository = roleSetRepository;
 		}
 
-		public async Task<RolSetView> GetYaposhkaSets()
+		public async Task GetYaposhkaSets()
 		{
 			List<RolSet> listEntity = await _yaposhkaProvider.GetYaposhkaSets();
 			await _roleSetRepository.AddRange(listEntity);
@@ -34,7 +33,7 @@ namespace EatParser.Services.Services
 			//return view;
 		}
 
-		public async Task<RolSetView> GetMafiaSets()
+		public async Task GetMafiaSets()
 		{
 			List<RolSet> listEntity = await _mafiaProvider.GetMafiaSets();
 			await _roleSetRepository.AddRange(listEntity);

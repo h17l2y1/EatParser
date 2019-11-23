@@ -1,9 +1,11 @@
-﻿namespace EatParser.Services.Services.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace EatParser.Services.Services.Interfaces
 {
 	public interface IGrabberService
 	{
-		void GetYaposhkaSets();
+		Task GetYaposhkaSets();
 
-		void GetMafiaSets();
+		Task GetMafiaSets();
 	}
 }

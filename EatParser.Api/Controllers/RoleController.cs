@@ -24,8 +24,8 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetByRestaurant(string restaurant)
 		{
-			var view = await _service.GetMafiaSets(restaurant);
-			return Ok(view);
+			await _service.GetMafiaSets();
+			return Ok();
 		}
 
 		[HttpGet]
