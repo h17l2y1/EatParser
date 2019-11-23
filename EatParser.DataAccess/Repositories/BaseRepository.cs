@@ -47,7 +47,7 @@ namespace EatParser.DataAccess.Repositories
 
 		public async Task Update(TEntity entity)
 		{
-			Connection.Update(entity);
+			await Connection.UpdateAsync(entity);
 		}
 
 		public async Task Remove(int id)

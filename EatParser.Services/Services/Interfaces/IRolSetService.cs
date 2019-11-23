@@ -5,8 +5,10 @@ namespace EatParser.Services.Services.Interfaces
 {
 	public interface IRolSetService
 	{
-		Task<RolSetView> GetYaposhkaSets(string str);
+		Task<RolSetView> GetAllSetsAsync();
 
-		Task<RolSetView> GetMafiaSets(string str);
+		Task<RolSetView> GetYaposhkaSets();
+
+		Task<RolSetView> GetMafiaSets();
 	}
 }

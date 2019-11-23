@@ -4,8 +4,10 @@ namespace EatParser.Services.Services.Interfaces
 {
 	public interface IGrabberService
 	{
-		Task GetYaposhkaSets();
+		Task GrabbAllRestaurant();
 
-		Task GetMafiaSets();
+		Task GrabbYaposhkaSets();
+
+		Task GrabbMafiaSets();
 	}
 }
