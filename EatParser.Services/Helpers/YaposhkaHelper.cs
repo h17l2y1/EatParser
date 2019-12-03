@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 using EatParser.Entities.Entities;
 using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;
@@ -17,6 +18,8 @@ namespace EatParser.Services.Helpers
 			List<int> weight = GetWeight(document);
 			List<string> images = GetImages(document);
 			List<int> prices = GetPrice(document);
+
+			Test(document);
 
 			List<RolSet> sets = Enumerable
 				.Range(0, names.Count)
@@ -95,6 +98,73 @@ namespace EatParser.Services.Helpers
 				return Int32.Parse(str.Substring(0, str.Length - 3));
 			}
 			return 0;
+		}
+
+		private void Test(IDocument document)
+		{
+			string cssClass = "brander-quickview description-content is-truncated";
+			//var test = document.QuerySelectorAll("a").Where(item => item.ClassName != null && item.ClassName.Contains(cssClass));
+
+
+			var tdList = document.QuerySelectorAll("div.product-container");
+
+
+			IElement obj = tdList[0];
+
+			//var name = obj.Children[0].GetAttribute("Title");
+			//var title = obj.Children[1].TextContent;
+			var img = obj.Children[0].Children[0].Children[0].NextElementSibling.GetAttribute("data-original");
+
+
+			var priceElement = tdList.First().GetElementsByClassName("price-wrapper");
+			var nameElement = tdList.First().GetElementsByClassName("brander-quickview images-wrap touch-hover");
+
+			var price = priceElement.First().GetAttribute("data-price-amount");
+			var name = nameElement.First().GetAttribute("Title");
+			var description = tdList.First().Children[1].TextContent;
+
+
+			var weightElemnt = obj.QuerySelectorAll("div").Where(item => item.ClassName != null && item.ClassName.Contains("weight-item")); 
+			var weight = weightElemnt.First().GetAttribute("data-weight-amount");
+
+
+			var test2 = obj.Closest("div").GetElementsByClassName("brander-quickview images-wrap touch-hover");
+
+			var test3 = obj.Closest("div").GetElementsByClassName("brander-quickview images-wrap touch-hover").First().GetAttribute("Title");
+
+			var test4 = obj.Closest("a.brander-quickview product-name");
+
+			var test5 = document.QuerySelector("a.brander-quickview product-name");
+
+			var test51 = document.QuerySelector("span.price");
+
+			var test52 = document.QuerySelector("span.price");
+
+			var z = test52.Text();
+
+			var aasd1 = document.QuerySelector("span.price").GetAttribute("Title");
+
+
+			var test6 = obj.Closest("a").GetElementsByClassName("brander-quickview product-name").First().GetAttribute("Title");
+
+
+
+
+			var a1 = 1;
+
+
+
+
+
+
+
+
+
+
+			var countElemnt = tdList.First().GetAttribute("listing-short-description");
+			var b0 = 1;
+
+
 		}
 
 	}

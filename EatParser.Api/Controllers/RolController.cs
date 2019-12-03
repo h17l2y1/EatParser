@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EatParser.Services.Services.Interfaces;
+using EatParser.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EatParser.Api.Controllers
@@ -18,21 +19,21 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			var view = await _service.GetAllSetsAsync();
+			RolSetView view = await _service.GetAllSetsAsync();
 			return Ok(view);
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> GetYaposhka()
 		{
-			var view = await _service.GetYaposhkaSets();
+			RolSetView view = await _service.GetYaposhkaSets();
 			return Ok(view);
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> GetMafia()
 		{
-			var view = await _service.GetMafiaSets();
+			RolSetView view = await _service.GetMafiaSets();
 			return Ok(view);
 		}
 

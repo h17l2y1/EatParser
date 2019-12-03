@@ -1,4 +1,6 @@
-﻿using AngleSharp.Html.Parser;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
 using EatParser.Entities.Entities;
 using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;
@@ -27,8 +29,8 @@ namespace EatParser.Services.Providers
 
 		public async Task<List<RolSet>> GetYaposhkaSets()
 		{
-			var source = await _htmlLoaderHelper.GetPageSource(BaseUrl);
-			var document = await domParser.ParseDocumentAsync(source);
+			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(BaseUrl);
+			IDocument document = await domParser.ParseDocumentAsync(source);
 
 			List<RolSet> result = _yaposhka.Parse(document);
 
