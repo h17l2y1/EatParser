@@ -102,61 +102,47 @@ namespace EatParser.Services.Helpers
 
 		private void Test(IDocument document)
 		{
-			string cssClass = "brander-quickview description-content is-truncated";
 			//var test = document.QuerySelectorAll("a").Where(item => item.ClassName != null && item.ClassName.Contains(cssClass));
 
 
-			var tdList = document.QuerySelectorAll("div.product-container");
+			IHtmlCollection<IElement> tdList = document.QuerySelectorAll("div.product-container");
+
+			var td = tdList[0];
+
+			//var img = obj.Children[0].Children[0].Children[0].NextElementSibling.GetAttribute("data-original");
 
 
-			IElement obj = tdList[0];
+			//var priceElement = td.GetElementsByClassName("price-wrapper");
+			//string price = priceElement.First().GetAttribute("data-price-amount");
 
-			//var name = obj.Children[0].GetAttribute("Title");
-			//var title = obj.Children[1].TextContent;
-			var img = obj.Children[0].Children[0].Children[0].NextElementSibling.GetAttribute("data-original");
+			//var nameElement = td.GetElementsByClassName("brander-quickview images-wrap touch-hover");
+			//string name = nameElement.First().GetAttribute("Title");
 
+			var description = tdList.First().Children[1];
 
-			var priceElement = tdList.First().GetElementsByClassName("price-wrapper");
-			var nameElement = tdList.First().GetElementsByClassName("brander-quickview images-wrap touch-hover");
+			IElement imgDiv = td.QuerySelector("div.data-original");
+			string img = imgDiv.Text();
 
-			var price = priceElement.First().GetAttribute("data-price-amount");
-			var name = nameElement.First().GetAttribute("Title");
-			var description = tdList.First().Children[1].TextContent;
+			IElement descDiv = td.QuerySelector("div.short-description");
+			string desc = descDiv.Text();
 
+			IElement _countDiv = td.QuerySelector("div.listing-short-description");
+			string _count = _countDiv.Text();
 
-			var weightElemnt = obj.QuerySelectorAll("div").Where(item => item.ClassName != null && item.ClassName.Contains("weight-item")); 
-			var weight = weightElemnt.First().GetAttribute("data-weight-amount");
+			IElement _weightDiv = td.QuerySelector("div.weight-item");
+			string _weight = _weightDiv.Text();
 
+			IElement _nameDiv = td.QuerySelector("div.name-wrap");
+			string _name = _nameDiv.Text();
 
-			var test2 = obj.Closest("div").GetElementsByClassName("brander-quickview images-wrap touch-hover");
-
-			var test3 = obj.Closest("div").GetElementsByClassName("brander-quickview images-wrap touch-hover").First().GetAttribute("Title");
-
-			var test4 = obj.Closest("a.brander-quickview product-name");
-
-			var test5 = document.QuerySelector("a.brander-quickview product-name");
-
-			var test51 = document.QuerySelector("span.price");
-
-			var test52 = document.QuerySelector("span.price");
-
-			var z = test52.Text();
-
-			var aasd1 = document.QuerySelector("span.price").GetAttribute("Title");
+			IElement _priceSpan = td.QuerySelector("span.price");  
+			string _price = _priceSpan.Text();
 
 
-			var test6 = obj.Closest("a").GetElementsByClassName("brander-quickview product-name").First().GetAttribute("Title");
+			// var test6 = obj.Closest("a").GetElementsByClassName("brander-quickview product-name").First().GetAttribute("Title");
 
-
-
-
-			var a1 = 1;
-
-
-
-
-
-
+			//var a = obj.Closest("a").GetElementsByClassName("brander-quickview product-name");
+			
 
 
 
