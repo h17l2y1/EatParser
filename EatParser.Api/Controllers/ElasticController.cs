@@ -19,6 +19,7 @@ namespace EatParser.Api.Controllers
 		}
 
 		[HttpGet]
+		// api/Elastic/Search?name=Ronaldo
 		public async Task<IActionResult> Search(string name)
 		{
 			IReadOnlyCollection<Person> response = await _service.Search(name);
