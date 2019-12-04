@@ -22,6 +22,9 @@ namespace EatParser.Services.Config
 			var mapper = config.CreateMapper();
 			services.AddSingleton(mapper);
 
+			services.AddSingleton<IEsClientProvider, EsClientProvider>();
+
+
 			services.InjectDataAccessDependency(сonfiguration);
 
 
@@ -29,6 +32,7 @@ namespace EatParser.Services.Config
 			services.AddScoped<IGrabberService, GrabberService>();
 			services.AddScoped<IAccountService, AccountService>();
 			services.AddScoped<IRolSetService, RolSetService>();
+			services.AddScoped<IEsService, EsService>();
 
 			// Providers;
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
