@@ -3,6 +3,7 @@ using EatParser.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Nest;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace EatParser.Api.Controllers
@@ -39,5 +40,20 @@ namespace EatParser.Api.Controllers
 			BulkResponse response = await _service.IndexMany();
 			return Ok(response);
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> IndexFile()
+		{
+			IndexResponse response = await _service.IndexFile();
+			return Ok(response);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> SearchFile(string word)
+		{
+			var response = await _service.SearchInFile(word);
+			return Ok(response);
+		}
+
 	}
 }

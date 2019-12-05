@@ -20,13 +20,10 @@ namespace EatParser.Services.Config
 				c.AddProfile(new MapperProfile());
 			});
 			var mapper = config.CreateMapper();
+
+			// Singleton
 			services.AddSingleton(mapper);
-
 			services.AddSingleton<IEsClientProvider, EsClientProvider>();
-
-
-			services.InjectDataAccessDependency(сonfiguration);
-
 
 			// Services;
 			services.AddScoped<IGrabberService, GrabberService>();
@@ -43,6 +40,9 @@ namespace EatParser.Services.Config
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();
 			services.AddScoped<IYaposhkaHelper, YaposhkaHelper>();
 			services.AddScoped<IMafiaHelper , MafiaHelper>();
+
+
+			services.InjectDataAccessDependency(сonfiguration);
 
 		}
 

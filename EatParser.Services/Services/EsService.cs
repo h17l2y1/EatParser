@@ -3,6 +3,7 @@ using EatParser.Services.Providers.Interfaces;
 using EatParser.Services.Services.Interfaces;
 using Nest;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Services
@@ -71,5 +72,64 @@ namespace EatParser.Services.Services
 			IReadOnlyCollection<Person> people = searchResponse.Documents;
 			return people;
 		}
+
+		public async Task<IndexResponse> IndexFile()
+		{
+			string path = @"C:\Users\Anuitex - 79\Desktop\";
+			string file = "file1.txt";
+
+
+			string fileData = GetFileData(path, file);
+			Document doc = new Document()
+			{
+				Name = file,
+				Path = path,
+				Data = fileData
+			};
+
+			IndexResponse indexResponse = await _client.IndexDocumentAsync(doc);
+
+			return indexResponse;
+
+		}
+
+		public async Task<IReadOnlyCollection<Document>> SearchInFile(string type)
+		{
+			ISearchResponse<Document> searchResponse = await _client.SearchAsync<Document>(s => s
+					.From(0)
+					.Size(10)
+					.Query(q => q
+						.Match(m => m.Field(f => f.Data)
+						.Query(type)
+						)
+					)
+			);
+
+			IReadOnlyCollection<Document> doc = searchResponse.Documents;
+			return doc;
+		}
+
+
+		private string GetFileData(string path, string fileName)
+		{
+			string fullpath = $@"{path}\{fileName}";
+			string fileData = default;
+
+			if (File.Exists(fullpath))
+			{
+				fileData = File.ReadAllText(fullpath);
+				return fileData;
+			}
+
+			return fileData;
+		}
 	}
+
+	public class Document
+	{
+		public string Name { get; set; }
+		public string Path { get; set; }
+		public string Data { get; set; }
+	}
+
 }

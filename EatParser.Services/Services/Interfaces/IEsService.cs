@@ -12,5 +12,9 @@ namespace EatParser.Services.Services.Interfaces
 		Task<IndexResponse> Index();
 
 		Task<BulkResponse> IndexMany();
+
+		Task<IndexResponse> IndexFile();
+
+		Task<IReadOnlyCollection<Document>> SearchInFile(string type);
 	}
 }
