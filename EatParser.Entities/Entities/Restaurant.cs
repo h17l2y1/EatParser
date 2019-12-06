@@ -10,6 +10,6 @@ namespace EatParser.Entities.Entities
 
 		[NotMapped]
 		[Computed]
-		public virtual ICollection<RolSet> RolSets { get; set; }
+		public virtual ICollection<Rol> RolSets { get; set; }
 	}
 }

@@ -3,13 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EatParser.Entities.Entities
 {
-	public class RolSet : BaseEntity
+	public class Product : BaseEntity
 	{
 		public string Name { get; set; }
 
+		public string Description { get; set; }
+
 		public int Weight { get; set; }
 
-		public int Count { get; set; }
+		public int? Count { get; set; }
 
 		public int Price { get; set; }
 
