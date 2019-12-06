@@ -19,7 +19,9 @@ namespace EatParser.DataAccess.Config
 
 			// Dapper Repository
 			services.AddTransient<IUserRepository, UserRepository>();
-			services.AddTransient<IRolSetRepository, RolSetRepository>();
+			services.AddTransient<IRolRepository, RolRepository>();
+			services.AddTransient<ISetRepository, SetRepository>();
+			services.AddTransient<ISushiRepository, SushiRepository>();
 
 		}
 	}

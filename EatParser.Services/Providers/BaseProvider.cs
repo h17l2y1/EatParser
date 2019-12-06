@@ -18,12 +18,18 @@ namespace EatParser.Services.Providers
 			domParser = new HtmlParser();
 		}
 
-		public string BaseUrl { get; set; }
+		public string SetsUrl { get; set; }
 
-		public string PageNumber { get; set; } = "page{CurrentId}";
+		public string RolsUrl { get; set; }
 
-		public int StartPoint { get; set; }
+		public string SushiUrl { get; set; }
 
-		public int EndPoint { get; set; }
+		public string PizzaUrl { get; set; }
+
+		//public string PageNumber { get; set; } = "page{CurrentId}";
+
+		//public int StartPoint { get; set; }
+
+		//public int EndPoint { get; set; }
 	}
 }

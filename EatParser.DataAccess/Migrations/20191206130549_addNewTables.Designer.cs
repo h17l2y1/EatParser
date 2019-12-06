@@ -4,14 +4,16 @@ using EatParser.DataAccess.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EatParser.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20191206130549_addNewTables")]
+    partial class addNewTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +36,8 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("Restaurants");
 
                     b.HasData(
-                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 13, 7, 26, 861, DateTimeKind.Utc), Name = "Mafia" },
-                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 13, 7, 26, 861, DateTimeKind.Utc), Name = "Yaposhka" }
+                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 13, 5, 33, 706, DateTimeKind.Utc), Name = "Mafia" },
+                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 13, 5, 33, 707, DateTimeKind.Utc), Name = "Yaposhka" }
                     );
                 });
 

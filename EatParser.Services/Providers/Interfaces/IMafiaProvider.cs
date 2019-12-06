@@ -6,6 +6,10 @@ namespace EatParser.Services.Providers.Interfaces
 {
 	public interface IMafiaProvider
 	{
-		Task<List<RolSet>> GetMafiaSets();
+		Task<List<Set>> GetSets();
+
+		Task<List<Rol>> GetRols();
+
+		Task<List<Sushi>> GetSushi();
 	}
 }

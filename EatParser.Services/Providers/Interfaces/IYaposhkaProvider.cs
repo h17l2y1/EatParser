@@ -6,6 +6,6 @@ namespace EatParser.Services.Providers.Interfaces
 {
 	public interface IYaposhkaProvider
 	{
-		Task<List<RolSet>> GetYaposhkaSets();
+		Task<List<Rol>> GetYaposhkaSets();
 	}
 }

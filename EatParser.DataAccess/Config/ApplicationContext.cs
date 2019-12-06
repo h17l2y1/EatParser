@@ -13,7 +13,11 @@ namespace EatParser.DataAccess.Config
 
 		public string DefaultConnection { get; set; }
 
-		public DbSet<RolSet> RolSets { get; set; }
+		public DbSet<Set> Sets { get; set; }
+
+		public DbSet<Rol> Rols { get; set; }
+
+		public DbSet<Sushi> Sushis { get; set; }
 
 		public DbSet<Restaurant> Restaurants { get; set; }
 
@@ -21,7 +25,9 @@ namespace EatParser.DataAccess.Config
 		{
 			var init = new AutoComplete();
 
-			builder.Entity<Restaurant>().HasData(init.CreateRestaurant().ToArray());
+			var list = init.CreateRestaurant().ToArray();
+
+			builder.Entity<Restaurant>().HasData(list);
 
 			base.OnModelCreating(builder);
 		}

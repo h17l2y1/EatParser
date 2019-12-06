@@ -20,19 +20,19 @@ namespace EatParser.Services.Providers
 		public YaposhkaProvider(IHtmlLoaderHelper htmlLoaderHelper, IConfiguration сonfiguration, IYaposhkaHelper yaposhka)
 			: base(htmlLoaderHelper, сonfiguration)
 		{
-			BaseUrl = _сonfiguration.GetSection($"Site:{_site}:Url").Value;
-			StartPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:StartPoint").Value);
-			EndPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:EndPoint").Value);
+			SetsUrl = _сonfiguration.GetSection($"Site:{_site}:Sets").Value;
+			//StartPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:StartPoint").Value);
+			//EndPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:EndPoint").Value);
 
 			_yaposhka = yaposhka;
 		}
 
-		public async Task<List<RolSet>> GetYaposhkaSets()
+		public async Task<List<Rol>> GetYaposhkaSets()
 		{
-			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(BaseUrl);
+			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(SetsUrl);
 			IDocument document = await domParser.ParseDocumentAsync(source);
 
-			List<RolSet> result = _yaposhka.Parse(document);
+			List<Rol> result = _yaposhka.Parse(document);
 
 			return result;
 		}

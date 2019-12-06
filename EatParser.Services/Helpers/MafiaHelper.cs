@@ -5,137 +5,102 @@ using EatParser.Services.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace EatParser.Services.Helpers
 {
 	public class MafiaHelper : IMafiaHelper
 	{
-		public List<RolSet> Parse(IDocument document)
+		public List<T> Parse<T>(IDocument document) where T : Product
 		{
-			List<string> names = GetNames(document);
-			Set set = GetСountWeightData(document);
-			List<int> prices = GetPrice(document);
-			List<string> images = GetImages(document);
+			IHtmlCollection<IElement> divs = document.QuerySelectorAll("div.product-item");
 
-			List<RolSet> sets = Enumerable
-				.Range(0, names.Count)
-				.Select(i => new RolSet
-				{
-					Name = names[i],
-					Weight = set.Weight[i],
-					Count = set.Count[i],
-					Price = prices[i],
-					Image = images[i],
-					RestaurantId = (int)RestaurantType.Mafia
-				})
+			List<T> sets = Enumerable
+				.Range(0, divs.Count())
+				.Select(i => GetRolSet<T>(divs[i]))
 				.ToList();
 
 			return sets;
 		}
 
-		private Set GetСountWeightData(IDocument document)
+		private T GetRolSet<T>(IElement td) where T : Product
 		{
-			IEnumerable<IElement> setData = document.QuerySelectorAll("div")
-				.Where(item => item.ClassName != null && item.ClassName.Contains("product-weight"));
+			string desc = GetData(td, "div.product-description");
+			string priceStr = GetData(td, "div.price");
 
-			Set countWeightList = GetSetsData(setData);
+			IElement currentIelement = td.QuerySelector("a.product-img");
+			string img = currentIelement.Children.First().GetAttribute("src");
+			string fullImg = $"https://mafia.ua{img}";
 
-			return countWeightList;
+			IElement currentIelement2 = td.QuerySelector("div.product-title");
+			string name = currentIelement2.Children.First().Text().Replace("\n", " ").Trim();
 
+			string test = GetData(td, "div.product-weight");
+			var set = GetSetsData(test);
+
+			int price = StringToInt(priceStr);
+
+			T genericObject = CreatObject<T>(name, desc, set.Weight, set.Count, price, fullImg, (int)RestaurantType.Mafia);
+
+			return genericObject;
 		}
 
-		private Set GetSetsData(IEnumerable<IElement> elem)
+		private T CreatObject<T>(string name, string desc, int weight, int? count, int price, string fullImg, int type) where T : Product
 		{
-			var weigthList = new List<int>();
-			var countList = new List<int>();
+			T genericObject = (T)Activator.CreateInstance(typeof(T));
 
-			foreach (var item in elem)
+			genericObject.Name = name;
+			genericObject.Description = desc;
+			genericObject.Weight = weight;
+			genericObject.Count = count;
+			genericObject.Price = price;
+			genericObject.Image = fullImg;
+			genericObject.RestaurantId = type;
+
+			return genericObject;
+		}
+
+		private Set GetSetsData(string str)
+		{
+			string setString = Regex.Replace(str, @"[^0-9$.]", "").Trim();
+			string[] setData = setString.Split(new char[] { '.' });
+
+			var set = new Set();
+
+			if (setData.Length < 2)
 			{
-				string setString = Regex.Replace(item.TextContent, @"[^0-9$.]", "").Trim();
-
-				string[] setData = setString.Split(new char[] { '.' });
-
-				if (setData.Length < 2)
-				{
-					countList.Add(0);
-					weigthList.Add(Int32.Parse(setData[0]));
-				}
-				if (setData.Length > 1)
-				{
-					countList.Add(Int32.Parse(setData[0]));
-					weigthList.Add(Int32.Parse(setData[1]));
-				}
+				set.Weight = Int32.Parse(setData[0]);
 			}
-
-			var set = new Set(countList, weigthList);
+			if (setData.Length > 1)
+			{
+				set.Count = Int32.Parse(setData[0]);
+				set.Weight = Int32.Parse(setData[1]);
+			}
 
 			return set;
 		}
 
-		private List<string> GetNames(IDocument document)
+		private int StringToInt(string str)
 		{
-			List<string> names = document.QuerySelectorAll("div")
-				.Where(item => item.ClassName != null && item.ClassName.Contains("product-title"))
-				.Select(i => i.Children.FirstOrDefault().TextContent.Trim())
-				.ToList();
-
-			return names;
+			str = Regex.Replace(str, "[^0-9]", "");
+			var number = Int32.Parse(str);
+			return number;
 		}
 
-		private List<int> GetPrice(IDocument document)
+		private string GetData(IElement ielement, string selector)
 		{
-			List<int> prices = document.QuerySelectorAll("span")
-				.Where(item => item.ClassName != null && item.ClassName.Contains("productPriceStatGA"))
-				.Select(i => PriceToInt(i))
-				.ToList();
-
-			return prices;
-		}
-
-		private int PriceToInt(IElement elem)
-		{
-			string str = elem.TextContent.Trim();
-			if (str.Length > 0)
-			{
-				return Int32.Parse(str);
-			}
-			return 0;
-		}
-
-		private List<string> GetImages(IDocument document)
-		{
-			var imageList = document
-				.QuerySelectorAll("a")
-				.Where(item => item.ClassName == "product-img")
-				.Select(m => GetPath(m.Children.FirstOrDefault().OuterHtml))
-				.ToList();
-
-			return imageList;
-		}
-
-		private string GetPath(string outerHtmlString)
-		{
-			Regex regex = new Regex(@"\S*.jpeg");
-			MatchCollection matchColl = regex.Matches(outerHtmlString);
-			var path = matchColl[0].ToString().Remove(0, 6);
-			var fullPath = $"https://mafia.ua/{path}";
-			return fullPath;
+			IElement descDiv = ielement.QuerySelector(selector);
+			string result = descDiv.Text();
+			result = result.Replace("\n", " ").Trim();
+			return result;
 		}
 
 	}
 
 	public class Set
 	{
-
-		public List<int> Count { get; set; }
-		public List<int> Weight { get; set; }
-
-		public Set(List<int> count, List<int> weight)
-		{
-			Count = count;
-			Weight = weight;
-		}
-
+		public int? Count { get; set; }
+		public int Weight { get; set; }
 	}
 }

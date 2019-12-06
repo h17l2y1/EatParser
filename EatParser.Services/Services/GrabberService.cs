@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using EatParser.DataAccess.Repositories.Interfaces;
+﻿using EatParser.DataAccess.Repositories.Interfaces;
 using EatParser.Entities.Entities;
 using EatParser.Services.Providers.Interfaces;
 using EatParser.Services.Services.Interfaces;
@@ -12,13 +11,18 @@ namespace EatParser.Services.Services
 	{
 		private readonly IYaposhkaProvider _yaposhkaProvider;
 		private readonly IMafiaProvider _mafiaProvider;
-		private readonly IRolSetRepository _roleSetRepository;
+		private readonly ISetRepository _setRepository;
+		private readonly IRolRepository _rolRepository;
+		private readonly ISushiRepository _sushiRepository;
 
-		public GrabberService(IYaposhkaProvider yaposhkaProvider, IMafiaProvider mafiaProvider, IRolSetRepository roleSetRepository)
+		public GrabberService(IYaposhkaProvider yaposhkaProvider, IMafiaProvider mafiaProvider,
+			ISetRepository setRepository, IRolRepository rolRepository, ISushiRepository sushiRepository)
 		{
 			_yaposhkaProvider = yaposhkaProvider;
 			_mafiaProvider = mafiaProvider;
-			_roleSetRepository = roleSetRepository;
+			_setRepository = setRepository;
+			_rolRepository = rolRepository;
+			_sushiRepository = sushiRepository;
 		}
 
 		public async Task GrabbAllRestaurant()
@@ -29,14 +33,19 @@ namespace EatParser.Services.Services
 
 		public async Task GrabbYaposhkaSets()
 		{
-			List<RolSet> listEntity = await _yaposhkaProvider.GetYaposhkaSets();
-			await _roleSetRepository.AddRange(listEntity);
+			List<Rol> listEntity = await _yaposhkaProvider.GetYaposhkaSets();
+			await _rolRepository.AddRange(listEntity);
 		}
 
 		public async Task GrabbMafiaSets()
 		{
-			List<RolSet> listEntity = await _mafiaProvider.GetMafiaSets();
-			await _roleSetRepository.AddRange(listEntity);
+			List<Set> sets = await _mafiaProvider.GetSets();
+			List<Rol> rols = await _mafiaProvider.GetRols();
+			List<Sushi> sushi = await _mafiaProvider.GetSushi();
+
+			await _setRepository.AddRange(sets);
+			//await _rolRepository.AddRange(rols);
+			//await _sushiRepository.AddRange(sushi);
 		}
 
 
