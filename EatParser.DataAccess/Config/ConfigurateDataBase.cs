@@ -22,6 +22,7 @@ namespace EatParser.DataAccess.Config
 			services.AddTransient<IRolRepository, RolRepository>();
 			services.AddTransient<ISetRepository, SetRepository>();
 			services.AddTransient<ISushiRepository, SushiRepository>();
+			services.AddTransient<IPizzaRepository, PizzaRepository>();
 
 		}
 	}

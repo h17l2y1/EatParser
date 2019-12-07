@@ -14,15 +14,17 @@ namespace EatParser.Services.Services
 		private readonly ISetRepository _setRepository;
 		private readonly IRolRepository _rolRepository;
 		private readonly ISushiRepository _sushiRepository;
+		private readonly IPizzaRepository _pizzaRepository;
 
 		public GrabberService(IYaposhkaProvider yaposhkaProvider, IMafiaProvider mafiaProvider,
-			ISetRepository setRepository, IRolRepository rolRepository, ISushiRepository sushiRepository)
+			ISetRepository setRepository, IRolRepository rolRepository, ISushiRepository sushiRepository, IPizzaRepository pizzaRepository)
 		{
 			_yaposhkaProvider = yaposhkaProvider;
 			_mafiaProvider = mafiaProvider;
 			_setRepository = setRepository;
 			_rolRepository = rolRepository;
 			_sushiRepository = sushiRepository;
+			_pizzaRepository = pizzaRepository;
 		}
 
 		public async Task GrabbAllRestaurant()
@@ -42,10 +44,12 @@ namespace EatParser.Services.Services
 			List<Set> sets = await _mafiaProvider.GetSets();
 			List<Rol> rols = await _mafiaProvider.GetRols();
 			List<Sushi> sushi = await _mafiaProvider.GetSushi();
+			List<Pizza> pizza = await _mafiaProvider.GetPizza();
 
 			await _setRepository.AddRange(sets);
-			//await _rolRepository.AddRange(rols);
-			//await _sushiRepository.AddRange(sushi);
+			await _rolRepository.AddRange(rols);
+			await _sushiRepository.AddRange(sushi);
+			await _pizzaRepository.AddRange(pizza);
 		}
 
 

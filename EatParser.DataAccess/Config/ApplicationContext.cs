@@ -19,6 +19,8 @@ namespace EatParser.DataAccess.Config
 
 		public DbSet<Sushi> Sushis { get; set; }
 
+		public DbSet<Pizza> Pizzas { get; set; }
+
 		public DbSet<Restaurant> Restaurants { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)

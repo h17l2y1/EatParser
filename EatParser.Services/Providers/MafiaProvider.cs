@@ -20,6 +20,7 @@ namespace EatParser.Services.Providers
 			SetsUrl = _сonfiguration.GetSection($"Site:{_site}:Sets").Value;
 			RolsUrl = _сonfiguration.GetSection($"Site:{_site}:Rols").Value;
 			SushiUrl = _сonfiguration.GetSection($"Site:{_site}:Sushi").Value;
+			PizzaUrl = _сonfiguration.GetSection($"Site:{_site}:Pizza").Value;
 			//StartPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:StartPoint").Value);
 			//EndPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:EndPoint").Value);
 
@@ -49,6 +50,15 @@ namespace EatParser.Services.Providers
 			var source = await _htmlLoaderHelper.GetPageSource(SushiUrl);
 			var document = await domParser.ParseDocumentAsync(source);
 			List<Sushi> result = _mafia.Parse<Sushi>(document);
+
+			return result;
+		}
+
+		public async Task<List<Pizza>> GetPizza()
+		{
+			var source = await _htmlLoaderHelper.GetPageSource(PizzaUrl);
+			var document = await domParser.ParseDocumentAsync(source);
+			List<Pizza> result = _mafia.Parse<Pizza>(document);
 
 			return result;
 		}
