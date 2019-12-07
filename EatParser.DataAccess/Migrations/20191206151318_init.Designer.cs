@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EatParser.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191206130549_addNewTables")]
-    partial class addNewTables
+    [Migration("20191206151318_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,33 @@ namespace EatParser.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EatParser.Entities.Entities.Pizza", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Count");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Price");
+
+                    b.Property<int>("RestaurantId");
+
+                    b.Property<int>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pizzas");
+                });
 
             modelBuilder.Entity("EatParser.Entities.Entities.Restaurant", b =>
                 {
@@ -36,8 +63,8 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("Restaurants");
 
                     b.HasData(
-                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 13, 5, 33, 706, DateTimeKind.Utc), Name = "Mafia" },
-                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 13, 5, 33, 707, DateTimeKind.Utc), Name = "Yaposhka" }
+                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 15, 13, 18, 757, DateTimeKind.Utc), Name = "Mafia" },
+                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 15, 13, 18, 757, DateTimeKind.Utc), Name = "Yaposhka" }
                     );
                 });
 

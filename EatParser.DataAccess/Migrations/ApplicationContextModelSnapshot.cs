@@ -19,6 +19,33 @@ namespace EatParser.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("EatParser.Entities.Entities.Pizza", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Count");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Price");
+
+                    b.Property<int>("RestaurantId");
+
+                    b.Property<int>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pizzas");
+                });
+
             modelBuilder.Entity("EatParser.Entities.Entities.Restaurant", b =>
                 {
                     b.Property<int>("Id")
@@ -34,8 +61,8 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("Restaurants");
 
                     b.HasData(
-                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 13, 7, 26, 861, DateTimeKind.Utc), Name = "Mafia" },
-                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 13, 7, 26, 861, DateTimeKind.Utc), Name = "Yaposhka" }
+                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 15, 13, 18, 757, DateTimeKind.Utc), Name = "Mafia" },
+                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 15, 13, 18, 757, DateTimeKind.Utc), Name = "Yaposhka" }
                     );
                 });
 
