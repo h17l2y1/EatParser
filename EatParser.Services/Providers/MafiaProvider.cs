@@ -21,8 +21,6 @@ namespace EatParser.Services.Providers
 			RolsUrl = _сonfiguration.GetSection($"Site:{_site}:Rols").Value;
 			SushiUrl = _сonfiguration.GetSection($"Site:{_site}:Sushi").Value;
 			PizzaUrl = _сonfiguration.GetSection($"Site:{_site}:Pizza").Value;
-			//StartPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:StartPoint").Value);
-			//EndPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:EndPoint").Value);
 
 			_mafia = mafia;
 		}

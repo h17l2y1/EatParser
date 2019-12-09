@@ -2,28 +2,26 @@
 using EatParser.Entities.Entities;
 using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace EatParser.Services.Helpers
 {
-	public class YaposhkaHelper : IYaposhkaHelper
+	public class YaposhkaHelper : BaseHelper, IYaposhkaHelper
 	{
-		public List<Rol> Parse(IDocument document)
+		public List<T> Parse<T>(IDocument document) where T : Product
 		{
-			IHtmlCollection<IElement> tdList = document.QuerySelectorAll("div.product-container");
+			IHtmlCollection<IElement> iElementList = document.QuerySelectorAll("div.product-container");
 
-			List<Rol> sets = Enumerable
-				.Range(0, tdList.Length)
-				.Select(i => GetRolSet(tdList[i]))
+			List<T> products = Enumerable
+				.Range(0, iElementList.Count())
+				.Select(i => CreateProduct<T>(iElementList[i]))
 				.ToList();
 
-			return sets;
+			return products;
 		}
 
-		private Rol GetRolSet(IElement td)
+		private T CreateProduct<T>(IElement td) where T : Product
 		{
 			string fullImage = GetData(td, "img.photo.image.lazy.lazy-loading.lazy-blur", "data-original");
 			string cropImage = GetData(td, "source.photo.image.lazy.lazy-loading.lazy-blur", "data-original");
@@ -34,42 +32,35 @@ namespace EatParser.Services.Helpers
 			string weightStr = GetData(td, "div.weight-item");
 
 			int price = StringToInt(priceStr);
-			int count = StringToInt(countStr);
+			int count = countStr == null ? 0 : StringToInt(countStr); ;
 			int weight = StringToInt(weightStr);
 
-			var newRolSet = new Rol
-			{
-				Name = name,
-				Description = desc,
-				Weight = weight,
-				Count = count,
-				Price = price,
-				Image = fullImage,
-				RestaurantId = (int)RestaurantType.Yaposhka
-			};
+			T product = CreatObject<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka);
 
-			return newRolSet;
-		}
-
-		private int StringToInt(string str)
-		{
-			str = Regex.Replace(str, "[^0-9]", "");
-			var number = Int32.Parse(str);
-			return number;
+			return product;
 		}
 
 		private string GetData(IElement ielement, string selector)
 		{
 			IElement descDiv = ielement.QuerySelector(selector);
+			if (descDiv == null)
+			{
+				return null;
+			}
+
 			string result = descDiv.Text();
 			result = result.Replace("\n", " ").Trim();
+			if (result.Length < 1)
+			{
+				return null;
+			}
 			return result;
 		}
 
-		private string GetData(IElement ielement, string selector, string attribute)
+		private string GetData(IElement iElement, string selector, string attribute)
 		{
-			IElement currentIelement = ielement.QuerySelector(selector);
-			string result = currentIelement.GetAttribute(attribute);
+			IElement currentIElement = iElement.QuerySelector(selector);
+			string result = currentIElement.GetAttribute(attribute);
 			result = result.Replace("\n", " ").Trim();
 			return result;
 		}

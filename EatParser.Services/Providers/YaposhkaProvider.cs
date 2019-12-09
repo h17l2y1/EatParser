@@ -21,21 +21,54 @@ namespace EatParser.Services.Providers
 			: base(htmlLoaderHelper, сonfiguration)
 		{
 			SetsUrl = _сonfiguration.GetSection($"Site:{_site}:Sets").Value;
-			//StartPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:StartPoint").Value);
-			//EndPoint = Int32.Parse(_сonfiguration.GetSection($"Site:{_site}:EndPoint").Value);
+			RolsUrl = _сonfiguration.GetSection($"Site:{_site}:Rols").Value;
+			SushiUrl = _сonfiguration.GetSection($"Site:{_site}:Sushi").Value;
+			PizzaUrl = _сonfiguration.GetSection($"Site:{_site}:Pizza").Value;
+			//Pizza2Url = _сonfiguration.GetSection($"Site:{_site}:Pizza2").Value;
 
 			_yaposhka = yaposhka;
 		}
 
-		public async Task<List<Rol>> GetYaposhkaSets()
+		public async Task<List<Set>> GetSets()
 		{
 			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(SetsUrl);
 			IDocument document = await domParser.ParseDocumentAsync(source);
-
-			List<Rol> result = _yaposhka.Parse(document);
+			List<Set> result = _yaposhka.Parse<Set>(document);
 
 			return result;
 		}
+
+		public async Task<List<Rol>> GetRols()
+		{
+			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(RolsUrl);
+			IDocument document = await domParser.ParseDocumentAsync(source);
+
+			List<Rol> result = _yaposhka.Parse<Rol>(document);
+
+			return result;
+		}
+
+		public async Task<List<Sushi>> GetSushi()
+		{
+			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(SushiUrl);
+			IDocument document = await domParser.ParseDocumentAsync(source);
+
+			List<Sushi> result = _yaposhka.Parse<Sushi>(document);
+
+			return result;
+		}
+
+		public async Task<List<Pizza>> GetPizza()
+		{
+			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(PizzaUrl);
+			IDocument document = await domParser.ParseDocumentAsync(source);
+
+			List<Pizza> result = _yaposhka.Parse<Pizza>(document);
+
+			return result;
+		}
+
+
 
 	}
 }
