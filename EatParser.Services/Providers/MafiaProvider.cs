@@ -1,4 +1,5 @@
-﻿using AngleSharp.Html.Parser;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Parser;
 using EatParser.Entities.Entities;
 using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;
@@ -27,36 +28,32 @@ namespace EatParser.Services.Providers
 
 		public async Task<List<Set>> GetSets()
 		{
-			var source = await _htmlLoaderHelper.GetPageSource(SetsUrl);
-			var document = await domParser.ParseDocumentAsync(source);
-			List<Set> result = _mafia.Parse<Set>(document);
-
+			List<Set> result = await ParsePage<Set>(SetsUrl);
 			return result;
 		}
 
 		public async Task<List<Rol>> GetRols()
 		{
-			var source = await _htmlLoaderHelper.GetPageSource(RolsUrl);
-			var document = await domParser.ParseDocumentAsync(source);
-			List<Rol> result = _mafia.Parse<Rol>(document);
-
+			List<Rol> result = await ParsePage<Rol>(RolsUrl);
 			return result;
 		}
 
 		public async Task<List<Sushi>> GetSushi()
 		{
-			var source = await _htmlLoaderHelper.GetPageSource(SushiUrl);
-			var document = await domParser.ParseDocumentAsync(source);
-			List<Sushi> result = _mafia.Parse<Sushi>(document);
-
+			List<Sushi> result = await ParsePage<Sushi>(SushiUrl);
 			return result;
 		}
 
 		public async Task<List<Pizza>> GetPizza()
 		{
-			var source = await _htmlLoaderHelper.GetPageSource(PizzaUrl);
-			var document = await domParser.ParseDocumentAsync(source);
-			List<Pizza> result = _mafia.Parse<Pizza>(document);
+			List<Pizza> result = await ParsePage<Pizza>(PizzaUrl);
+			return result;
+		}
+
+		private async Task<List<T>> ParsePage<T>(string url) where T : Product
+		{
+			IDocument document = await GetPage(url);
+			List<T> result = _mafia.Parse<T>(document);
 
 			return result;
 		}

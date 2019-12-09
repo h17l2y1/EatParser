@@ -40,7 +40,7 @@ namespace EatParser.Services.Services
 			List<Sushi> sushi = await _yaposhkaProvider.GetSushi();
 			List<Pizza> pizza = await _yaposhkaProvider.GetPizza();
 
-			await SaveAll(sets, rols, sushi, pizza);
+			//await SaveAll(sets, rols, sushi, pizza);
 		}
 
 		public async Task GrabbMafiaSets()
@@ -50,7 +50,7 @@ namespace EatParser.Services.Services
 			List<Sushi> sushi = await _mafiaProvider.GetSushi();
 			List<Pizza> pizza = await _mafiaProvider.GetPizza();
 
-			await SaveAll(sets, rols, sushi, pizza);
+			//await SaveAll(sets, rols, sushi, pizza);
 		}
 
 		private async Task SaveAll(List<Set> sets, List<Rol> rols, List<Sushi> sushi, List<Pizza> pizza)

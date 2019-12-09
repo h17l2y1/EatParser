@@ -1,4 +1,5 @@
-﻿using EatParser.Entities.Entities;
+﻿using AngleSharp.Dom;
+using EatParser.Entities.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,5 +14,7 @@ namespace EatParser.Services.Providers.Interfaces
 		//Task<List<Sushi>> GetSushi();
 
 		//Task<List<Pizza>> GetPizza();
+
+		Task<IDocument> GetPage(string url);
 	}
 }
