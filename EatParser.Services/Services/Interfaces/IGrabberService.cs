@@ -6,8 +6,8 @@ namespace EatParser.Services.Services.Interfaces
 	{
 		Task GrabbAllRestaurant();
 
-		Task GrabbYaposhkaSets();
+		Task GrabbYaposhka();
 
-		Task GrabbMafiaSets();
+		Task GrabbMafia();
 	}
 }

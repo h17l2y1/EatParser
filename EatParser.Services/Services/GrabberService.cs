@@ -29,11 +29,11 @@ namespace EatParser.Services.Services
 
 		public async Task GrabbAllRestaurant()
 		{
-			await GrabbYaposhkaSets();
-			await GrabbMafiaSets();
+			await GrabbYaposhka();
+			await GrabbMafia();
 		}
 
-		public async Task GrabbYaposhkaSets()
+		public async Task GrabbYaposhka()
 		{
 			List<Set> sets = await _yaposhkaProvider.GetSets();
 			List<Rol> rols = await _yaposhkaProvider.GetRols();
@@ -43,7 +43,7 @@ namespace EatParser.Services.Services
 			//await SaveAll(sets, rols, sushi, pizza);
 		}
 
-		public async Task GrabbMafiaSets()
+		public async Task GrabbMafia()
 		{
 			List<Set> sets = await _mafiaProvider.GetSets();
 			List<Rol> rols = await _mafiaProvider.GetRols();
