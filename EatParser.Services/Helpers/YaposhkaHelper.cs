@@ -35,34 +35,9 @@ namespace EatParser.Services.Helpers
 			int count = countStr == null ? 0 : StringToInt(countStr); ;
 			int weight = StringToInt(weightStr);
 
-			T product = CreatObject<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka);
+			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka);
 
 			return product;
-		}
-
-		private string GetData(IElement ielement, string selector)
-		{
-			IElement descDiv = ielement.QuerySelector(selector);
-			if (descDiv == null)
-			{
-				return null;
-			}
-
-			string result = descDiv.Text();
-			result = result.Replace("\n", " ").Trim();
-			if (result.Length < 1)
-			{
-				return null;
-			}
-			return result;
-		}
-
-		private string GetData(IElement iElement, string selector, string attribute)
-		{
-			IElement currentIElement = iElement.QuerySelector(selector);
-			string result = currentIElement.GetAttribute(attribute);
-			result = result.Replace("\n", " ").Trim();
-			return result;
 		}
 
 	}
