@@ -26,7 +26,7 @@ namespace EatParser.Services.Providers
 
 		public async Task<List<Rol>> GetRols()
 		{
-			List<Rol> result = await ParsePage<Rol>(SushiUrl);
+			List<Rol> result = await ParsePage<Rol>(RolsUrl);
 			return result;
 		}
 

@@ -1,5 +1,4 @@
 ﻿using AngleSharp.Dom;
-using AngleSharp.Html.Parser;
 using EatParser.Entities.Entities;
 using EatParser.Entities.Types;
 using EatParser.Services.Helpers.Interfaces;

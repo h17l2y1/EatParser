@@ -36,7 +36,7 @@ namespace EatParser.Services.Helpers
 			string test = GetData(td, "div.product-weight");
 			TempSet set = CreateTempSet(test);
 
-			int price = StringToInt(priceStr);
+			int? price = StringToInt(priceStr);
 
 			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImg, (int)RestaurantType.Mafia);
 

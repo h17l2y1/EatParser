@@ -28,7 +28,7 @@ namespace EatParser.Services.Helpers
 			string test = GetData(td, "div.product-introtext");
 			TempSet set = CreateTempSet(test);
 			string priceStr = GetData(td, "span.price");
-			int price = StringToInt(priceStr);
+			int? price = StringToInt(priceStr);
 			string name = GetData(td, "img.product-image", "title");
 			string desc = "";
 

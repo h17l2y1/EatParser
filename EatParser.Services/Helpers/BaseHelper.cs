@@ -12,23 +12,28 @@ namespace EatParser.Services.Helpers
 	{
 		protected IHtmlCollection<IElement> _divs;
 
-		public T CreatProduct<T>(string name, string desc, int weight, int? count, int price, string fullImg, int type) where T : Product
+		public T CreatProduct<T>(string name, string desc, int? weight, int? count, int? price, string fullImg, int type) where T : Product
 		{
-			T genericObject = (T)Activator.CreateInstance(typeof(T));
+			T product = (T)Activator.CreateInstance(typeof(T));
 
-			genericObject.Name = name;
-			genericObject.Description = desc;
-			genericObject.Weight = weight;
-			genericObject.Count = count;
-			genericObject.Price = price;
-			genericObject.Image = fullImg;
-			genericObject.RestaurantId = type;
+			product.Name = name;
+			product.Description = desc;
+			product.Weight = weight;
+			product.Count = count;
+			product.Price = price;
+			product.Image = fullImg;
+			product.RestaurantId = type;
 
-			return genericObject;
+			return product;
 		}
 
-		public int StringToInt(string str)
+		public int? StringToInt(string str)
 		{
+			if (str == null)
+			{
+				return null;
+			}
+
 			str = Regex.Replace(str, "[^0-9]", "");
 			var number = Int32.Parse(str);
 			return number;
@@ -49,7 +54,14 @@ namespace EatParser.Services.Helpers
 
 			string ch = Regex.Replace(productString, @"[0-9]", "");
 
-			int[] setData = productString.Split(ch).Select(x => Convert.ToInt32(x)).ToArray();
+			int[] setData = productString.Split(ch).Select(x =>
+			{
+				if (!int.TryParse(x, out int result))
+				{
+					return 0;
+				}
+				return result;
+			}).ToArray();
 
 			return setData;
 		}

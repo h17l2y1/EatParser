@@ -31,9 +31,9 @@ namespace EatParser.Services.Helpers
 			string countStr = GetData(td, "div.listing-short-description");
 			string weightStr = GetData(td, "div.weight-item");
 
-			int price = StringToInt(priceStr);
-			int count = countStr == null ? 0 : StringToInt(countStr); ;
-			int weight = StringToInt(weightStr);
+			int? price = StringToInt(priceStr);
+			int? count = countStr == null ? 0 : StringToInt(countStr); ;
+			int? weight = StringToInt(weightStr);
 
 			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka);
 

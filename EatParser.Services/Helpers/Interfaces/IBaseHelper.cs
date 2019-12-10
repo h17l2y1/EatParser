@@ -6,9 +6,9 @@ namespace EatParser.Services.Helpers.Interfaces
 {
 	public interface IBaseHelper
 	{
-		T CreatProduct<T>(string name, string desc, int weight, int? count, int price, string fullImg, int type) where T : Product;
+		T CreatProduct<T>(string name, string desc, int? weight, int? count, int? price, string fullImg, int type) where T : Product;
 
-		int StringToInt(string str);
+		int? StringToInt(string str);
 
 		int[] StringToIntArray(string str);
 
