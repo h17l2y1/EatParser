@@ -66,9 +66,8 @@ namespace EatParser.Services.Services
 			List<Set> sets = await _sushiPapaProvider.GetSets();
 			List<Rol> rols = await _sushiPapaProvider.GetRols();
 			List<Sushi> sushi = await _sushiPapaProvider.GetSushi();
-			List<Pizza> pizza = new List<Pizza>();
 
-			await SaveAll(sets, rols, sushi, pizza);
+			await SaveAll(sets, rols, sushi, null);
 		}
 
 		public async Task GrabbRollClub()
@@ -76,9 +75,8 @@ namespace EatParser.Services.Services
 			List<Set> sets = await _rollClubProvider.GetSets();
 			List<Rol> rols = await _rollClubProvider.GetRols();
 			List<Sushi> sushi = await _rollClubProvider.GetSushi();
-			List<Pizza> pizza = new List<Pizza>();
 
-			await SaveAll(sets, rols, sushi, pizza);
+			await SaveAll(sets, rols, sushi, null);
 		}
 
 		private async Task SaveAll(List<Set> sets, List<Rol> rols, List<Sushi> sushi, List<Pizza> pizza)

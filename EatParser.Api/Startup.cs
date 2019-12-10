@@ -39,6 +39,7 @@ namespace EatParser.Api
 			}
 
 			app.UseCors("AllowAllPolicy");
+			app.UseMiddleware<ErrorHandlingMiddleware>();
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
