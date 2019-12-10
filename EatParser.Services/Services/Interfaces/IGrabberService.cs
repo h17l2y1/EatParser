@@ -9,5 +9,7 @@ namespace EatParser.Services.Services.Interfaces
 		Task GrabbYaposhka();
 
 		Task GrabbMafia();
+
+		Task GrabbSushiPapa();
 	}
 }

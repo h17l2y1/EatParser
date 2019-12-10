@@ -11,12 +11,13 @@ namespace EatParser.Services.Services
 	{
 		private readonly IYaposhkaProvider _yaposhkaProvider;
 		private readonly IMafiaProvider _mafiaProvider;
+		private readonly ISushiPapaProvider _sushiPapaProvider;
 		private readonly ISetRepository _setRepository;
 		private readonly IRolRepository _rolRepository;
 		private readonly ISushiRepository _sushiRepository;
 		private readonly IPizzaRepository _pizzaRepository;
 
-		public GrabberService(IYaposhkaProvider yaposhkaProvider, IMafiaProvider mafiaProvider,
+		public GrabberService(IYaposhkaProvider yaposhkaProvider, IMafiaProvider mafiaProvider, ISushiPapaProvider sushiPapaProvider,
 			ISetRepository setRepository, IRolRepository rolRepository, ISushiRepository sushiRepository, IPizzaRepository pizzaRepository)
 		{
 			_yaposhkaProvider = yaposhkaProvider;
@@ -25,6 +26,7 @@ namespace EatParser.Services.Services
 			_rolRepository = rolRepository;
 			_sushiRepository = sushiRepository;
 			_pizzaRepository = pizzaRepository;
+			_sushiPapaProvider = sushiPapaProvider;
 		}
 
 		public async Task GrabbAllRestaurant()
@@ -40,7 +42,7 @@ namespace EatParser.Services.Services
 			List<Sushi> sushi = await _yaposhkaProvider.GetSushi();
 			List<Pizza> pizza = await _yaposhkaProvider.GetPizza();
 
-			//await SaveAll(sets, rols, sushi, pizza);
+			await SaveAll(sets, rols, sushi, pizza);
 		}
 
 		public async Task GrabbMafia()
@@ -50,17 +52,25 @@ namespace EatParser.Services.Services
 			List<Sushi> sushi = await _mafiaProvider.GetSushi();
 			List<Pizza> pizza = await _mafiaProvider.GetPizza();
 
+			await SaveAll(sets, rols, sushi, pizza);
+		}
+
+		public async Task GrabbSushiPapa()
+		{
+			List<Set> sets = await _sushiPapaProvider.GetSets();
+			//List<Rol> rols = await _sushiPapaProvider.GetRols();
+			//List<Sushi> sushi = await _sushiPapaProvider.GetSushi();
+
 			//await SaveAll(sets, rols, sushi, pizza);
 		}
 
 		private async Task SaveAll(List<Set> sets, List<Rol> rols, List<Sushi> sushi, List<Pizza> pizza)
 		{
-			await _setRepository.AddRange(sets);
-			await _rolRepository.AddRange(rols);
-			await _sushiRepository.AddRange(sushi);
-			await _pizzaRepository.AddRange(pizza);
+			//await _setRepository.AddRange(sets);
+			//await _rolRepository.AddRange(rols);
+			//await _sushiRepository.AddRange(sushi);
+			//await _pizzaRepository.AddRange(pizza);
 		}
-
 
 	}
 }

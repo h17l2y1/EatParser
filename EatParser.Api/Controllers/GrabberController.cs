@@ -36,6 +36,13 @@ namespace EatParser.Api.Controllers
 			return Ok();
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> GrabbSushiPapa()
+		{
+			await _service.GrabbSushiPapa();
+			return Ok();
+		}
+
 	}
 
 }
