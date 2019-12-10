@@ -43,6 +43,13 @@ namespace EatParser.Api.Controllers
 			return Ok();
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> GrabbRollClub()
+		{
+			await _service.GrabbRollClub();
+			return Ok();
+		}
+
 	}
 
 }

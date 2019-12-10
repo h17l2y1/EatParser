@@ -35,12 +35,14 @@ namespace EatParser.Services.Config
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
 			services.AddScoped<IMafiaProvider, MafiaProvider>();
 			services.AddScoped<ISushiPapaProvider, SushiPapaProvider>();
+			services.AddScoped<IRollClubProvider, RollClubProvider>();
 
 			// Helpers;
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();
 			services.AddScoped<IYaposhkaHelper, YaposhkaHelper>();
 			services.AddScoped<IMafiaHelper , MafiaHelper>();
 			services.AddScoped<ISushiPapaHelper, SushiPapaHelper>();
+			services.AddScoped<IRollClubHelper, RollClubHelper>();
 
 		}
 

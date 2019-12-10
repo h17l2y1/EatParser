@@ -11,5 +11,7 @@ namespace EatParser.Services.Services.Interfaces
 		Task GrabbMafia();
 
 		Task GrabbSushiPapa();
+
+		Task GrabbRollClub();
 	}
 }

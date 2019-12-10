@@ -1,5 +1,6 @@
 ﻿using EatParser.Entities.Entities;
 using EatParser.Entities.Types;
+using System;
 using System.Collections.Generic;
 
 namespace EatParser.DataAccess.Config
@@ -8,11 +9,12 @@ namespace EatParser.DataAccess.Config
 	{
 		public List<Restaurant> CreateRestaurant()
 		{
-			var list = new List<Restaurant>()
+			var list = new List<Restaurant>();
+
+			foreach (RestaurantType type in Enum.GetValues(typeof(RestaurantType)))
 			{
-				new Restaurant() { Id = (int)RestaurantType.Mafia, Name = RestaurantType.Mafia.ToString() },
-				new Restaurant() { Id = (int)RestaurantType.Yaposhka, Name = RestaurantType.Yaposhka.ToString() }
-			};
+				list.Add(new Restaurant() { Id = (int)type, Name = type.ToString() });
+			}
 
 			return list;
 		}
