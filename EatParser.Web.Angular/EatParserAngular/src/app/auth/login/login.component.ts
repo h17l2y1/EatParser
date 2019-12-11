@@ -48,4 +48,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  public redirect(page: string): void {
+    if (page === "menu") {
+      this.router.navigate(['/menu']);
+      return;
+    }
+    if (page === "second") {
+      this.router.navigate(['/second']);
+      return;
+    }
+    if (page === "third") {
+      this.router.navigate(['/third']);
+      return;
+    }
+  }
+
 }
