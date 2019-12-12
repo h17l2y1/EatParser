@@ -1,5 +1,42 @@
-<p>
-  main-menu works!
-</p>
+<div class="menu-container">
+  <div></div>
+  <div class="cards-list">
 
-<button (click)="onLogout()">Logout</button>
+    <div class="card" (click)="redirect('sets')">
+      <div class="card_image">
+        <img src="https://i.gifer.com/3Tq.gif" />
+      </div>
+      <div class="card_title title-white">
+        <p>Sets</p>
+      </div>
+    </div>
+
+    <div class="card" (click)="redirect('rols')">
+      <div class="card_image">
+        <img src="https://i.gifer.com/3Tb.gif" />
+      </div>
+      <div class="card_title title-white">
+        <p>Rols</p>
+      </div>
+    </div>
+
+    <div class="card" (click)="redirect('sushi')">
+      <div class="card_image">
+        <img src="https://i.gifer.com/7kX.gif" />
+      </div>
+      <div class="card_title">
+        <p>Sushi</p>
+      </div>
+    </div>
+
+    <div class="card" (click)="redirect('pizza')">
+      <div class="card_image">
+        <img src="https://i.gifer.com/SfC.gif" />
+      </div>
+      <div class="card_title title-black">
+        <p>Pizza</p>
+      </div>
+    </div>
+
+  </div>
+</div>

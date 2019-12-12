@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThirdRoutes } from './third.routing';
-import { ThirdComponent } from './third.component';
+import { SetComponent } from './set.component';
+import { SetRoutes } from './set.routing';
 
 @NgModule({
   declarations: [
-    ThirdComponent
+    SetComponent
   ],
   imports: [
     CommonModule,
-    ThirdRoutes
+    SetRoutes
   ]
 })
-export class ThirdModule { }
+export class SetModule { }
