@@ -9,9 +9,9 @@ namespace EatParser.Api.Controllers
 	[ApiController]
 	public class RolController : ControllerBase
 	{
-		private readonly IRolSetService _service;
+		private readonly IRolService _service;
 
-		public RolController(IRolSetService service)
+		public RolController(IRolService service)
 		{
 			_service = service;
 		}
@@ -19,21 +19,7 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			RolSetView view = await _service.GetAllSetsAsync();
-			return Ok(view);
-		}
-
-		[HttpGet]
-		public async Task<IActionResult> GetYaposhka()
-		{
-			RolSetView view = await _service.GetYaposhkaSets();
-			return Ok(view);
-		}
-
-		[HttpGet]
-		public async Task<IActionResult> GetMafia()
-		{
-			RolSetView view = await _service.GetMafiaSets();
+			GetAllRolView view = await _service.GetAllSetsAsync();
 			return Ok(view);
 		}
 

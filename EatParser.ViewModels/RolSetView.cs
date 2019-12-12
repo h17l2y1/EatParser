@@ -2,13 +2,13 @@
 
 namespace EatParser.ViewModels
 {
-	public class RolSetView
+	public class GetAllRolView
 	{
-		public List<SetView> RolSet { get; set; }
+		public List<ProductView> Rols { get; set; }
 
-		public RolSetView(List<SetView> set)
+		public GetAllRolView(List<ProductView> set)
 		{
-			RolSet = set;
+			Rols = set;
 		}
 
 	}

@@ -3,12 +3,9 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Services.Interfaces
 {
-	public interface IRolSetService
+	public interface IRolService
 	{
-		Task<RolSetView> GetAllSetsAsync();
+		Task<GetAllRolView> GetAllSetsAsync();
 
-		Task<RolSetView> GetYaposhkaSets();
-
-		Task<RolSetView> GetMafiaSets();
 	}
 }
