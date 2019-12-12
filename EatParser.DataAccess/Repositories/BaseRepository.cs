@@ -37,17 +37,26 @@ namespace EatParser.DataAccess.Repositories
 
 		public async Task Add(TEntity item)
 		{
-			await Connection.InsertAsync(item);
+			if (item != null)
+			{
+				await Connection.InsertAsync(item);
+			}
 		}
 
 		public async Task AddRange(List<TEntity> entity)
 		{
-			await Connection.InsertAsync(entity);
+			if (entity != null)
+			{
+				await Connection.InsertAsync(entity);
+			}
 		}
 
 		public async Task Update(TEntity entity)
 		{
-			await Connection.UpdateAsync(entity);
+			if (entity != null)
+			{
+				await Connection.UpdateAsync(entity);
+			}
 		}
 
 		public async Task Remove(int id)

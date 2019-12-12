@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EatParser.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191121144901_addAutoInc")]
-    partial class addAutoInc
+    [Migration("20191210143058_addNewRestaurans")]
+    partial class addNewRestaurans
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,33 @@ namespace EatParser.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EatParser.Entities.Entities.Pizza", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Count");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("Price");
+
+                    b.Property<int>("RestaurantId");
+
+                    b.Property<int?>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pizzas");
+                });
 
             modelBuilder.Entity("EatParser.Entities.Entities.Restaurant", b =>
                 {
@@ -34,31 +61,94 @@ namespace EatParser.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+
+                    b.HasData(
+                        new { Id = 1, CreationDate = new DateTime(2019, 12, 10, 14, 30, 58, 119, DateTimeKind.Utc), Name = "Mafia" },
+                        new { Id = 2, CreationDate = new DateTime(2019, 12, 10, 14, 30, 58, 119, DateTimeKind.Utc), Name = "Yaposhka" },
+                        new { Id = 3, CreationDate = new DateTime(2019, 12, 10, 14, 30, 58, 119, DateTimeKind.Utc), Name = "SushiPapa" },
+                        new { Id = 4, CreationDate = new DateTime(2019, 12, 10, 14, 30, 58, 119, DateTimeKind.Utc), Name = "RollClub" }
+                    );
                 });
 
-            modelBuilder.Entity("EatParser.Entities.Entities.RolSet", b =>
+            modelBuilder.Entity("EatParser.Entities.Entities.Rol", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Count");
+                    b.Property<int?>("Count");
 
                     b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Image");
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Price");
+                    b.Property<int?>("Price");
 
                     b.Property<int>("RestaurantId");
 
-                    b.Property<int>("Weight");
+                    b.Property<int?>("Weight");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RolSets");
+                    b.ToTable("Rols");
+                });
+
+            modelBuilder.Entity("EatParser.Entities.Entities.Set", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Count");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("Price");
+
+                    b.Property<int>("RestaurantId");
+
+                    b.Property<int?>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sets");
+                });
+
+            modelBuilder.Entity("EatParser.Entities.Entities.Sushi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Count");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("Price");
+
+                    b.Property<int>("RestaurantId");
+
+                    b.Property<int?>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sushis");
                 });
 
             modelBuilder.Entity("EatParser.Entities.Entities.User", b =>

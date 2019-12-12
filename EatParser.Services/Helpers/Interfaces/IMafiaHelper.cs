@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace EatParser.Services.Helpers.Interfaces
 {
-	public interface IMafiaHelper
+	public interface IMafiaHelper : IBaseHelper
 	{
-		List<RolSet> Parse(IDocument document);
-
+		List<T> Parse<T>(IDocument document) where T : Product;
 	}
 }

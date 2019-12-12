@@ -25,14 +25,28 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GrabbYaposhka()
 		{
-			await _service.GrabbYaposhkaSets();
+			await _service.GrabbYaposhka();
 			return Ok();
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> GrabbMafia()
 		{
-			await _service.GrabbMafiaSets();
+			await _service.GrabbMafia();
+			return Ok();
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GrabbSushiPapa()
+		{
+			await _service.GrabbSushiPapa();
+			return Ok();
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GrabbRollClub()
+		{
+			await _service.GrabbRollClub();
 			return Ok();
 		}
 

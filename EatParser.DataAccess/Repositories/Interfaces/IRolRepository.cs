@@ -2,7 +2,7 @@
 
 namespace EatParser.DataAccess.Repositories.Interfaces
 {
-	public interface IRolSetRepository : IBaseRepository<RolSet>
+	public interface IRolRepository : IBaseRepository<Rol>
 	{
 	}
 }

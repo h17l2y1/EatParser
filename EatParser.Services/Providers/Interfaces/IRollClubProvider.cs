@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers.Interfaces
 {
-	public interface IYaposhkaProvider : IBaseProvider
+	public interface IRollClubProvider : IBaseProvider
 	{
 		Task<List<Set>> GetSets();
 

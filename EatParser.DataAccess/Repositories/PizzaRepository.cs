@@ -5,9 +5,9 @@ using Microsoft.Extensions.Options;
 
 namespace EatParser.DataAccess.Repositories
 {
-	public class RolSetRepository : BaseRepository<RolSet>, IRolSetRepository
+	public class PizzaRepository : BaseRepository<Pizza>, IPizzaRepository
 	{
-		public RolSetRepository(IOptions<ConnectionStrings> connectionConfig) : base(connectionConfig)
+		public PizzaRepository(IOptions<ConnectionStrings> connectionConfig) : base(connectionConfig)
 		{
 		}
 	}

@@ -10,9 +10,9 @@ namespace EatParser.Services.Services
 	public class RolSetService : IRolSetService
 	{
 		private readonly IMapper _mapper;
-		private readonly IRolSetRepository _roleSetRepository;
+		private readonly IRolRepository _roleSetRepository;
 
-		public RolSetService(IMapper mapper, IRolSetRepository roleSetRepository)
+		public RolSetService(IMapper mapper, IRolRepository roleSetRepository)
 		{
 			_mapper = mapper;
 			_roleSetRepository = roleSetRepository;

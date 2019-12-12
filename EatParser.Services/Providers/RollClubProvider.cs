@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers
 {
-	public class MafiaProvider : BaseProvider, IMafiaProvider
+	public class RollClubProvider : BaseProvider, IRollClubProvider
 	{
-		protected readonly IMafiaHelper _mafia;
-		protected readonly string _site = RestaurantType.Mafia.ToString();
+		protected readonly IRollClubHelper _rollClub;
+		protected readonly string _site = RestaurantType.RollClub.ToString();
 
-		public MafiaProvider(IHtmlLoaderHelper htmlLoaderHelper, IConfiguration сonfiguration, IMafiaHelper mafia)
+		public RollClubProvider(IHtmlLoaderHelper htmlLoaderHelper, IConfiguration сonfiguration, IRollClubHelper rollClub)
 			: base(htmlLoaderHelper, сonfiguration)
 		{
 			SetsUrl = _сonfiguration.GetSection($"Site:{_site}:Sets").Value;
@@ -22,12 +22,12 @@ namespace EatParser.Services.Providers
 			SushiUrl = _сonfiguration.GetSection($"Site:{_site}:Sushi").Value;
 			PizzaUrl = _сonfiguration.GetSection($"Site:{_site}:Pizza").Value;
 
-			_mafia = mafia;
+			_rollClub = rollClub;
 		}
 
-		public async Task<List<Set>> GetSets()
+		public async Task<List<Pizza>> GetPizza()
 		{
-			List<Set> result = await ParsePage<Set>(SetsUrl);
+			List<Pizza> result = await ParsePage<Pizza>(PizzaUrl);
 			return result;
 		}
 
@@ -37,22 +37,22 @@ namespace EatParser.Services.Providers
 			return result;
 		}
 
+		public async Task<List<Set>> GetSets()
+		{
+			List<Set> result = await ParsePage<Set>(SetsUrl);
+			return result;
+		}
+
 		public async Task<List<Sushi>> GetSushi()
 		{
 			List<Sushi> result = await ParsePage<Sushi>(SushiUrl);
 			return result;
 		}
 
-		public async Task<List<Pizza>> GetPizza()
-		{
-			List<Pizza> result = await ParsePage<Pizza>(PizzaUrl);
-			return result;
-		}
-
 		private async Task<List<T>> ParsePage<T>(string url) where T : Product
 		{
 			IDocument document = await GetPage(url);
-			List<T> result = _mafia.Parse<T>(document);
+			List<T> result = _rollClub.Parse<T>(document);
 
 			return result;
 		}

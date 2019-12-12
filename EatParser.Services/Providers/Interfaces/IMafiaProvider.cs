@@ -4,8 +4,14 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers.Interfaces
 {
-	public interface IMafiaProvider
+	public interface IMafiaProvider : IBaseProvider
 	{
-		Task<List<RolSet>> GetMafiaSets();
+		Task<List<Set>> GetSets();
+
+		Task<List<Rol>> GetRols();
+
+		Task<List<Sushi>> GetSushi();
+
+		Task<List<Pizza>> GetPizza();
 	}
 }
