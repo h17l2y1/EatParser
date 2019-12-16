@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RolService } from 'src/app/shared/service/rol.service';
-import { RolsView } from 'src/app/shared/model/rol/rols.view';
+import { RolsView, RolsViewItem } from 'src/app/shared/model/rol/rols.view';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-rol',
@@ -9,7 +10,8 @@ import { RolsView } from 'src/app/shared/model/rol/rols.view';
 })
 export class RolComponent implements OnInit {
 
-  public rolsView: RolsView;
+  public response: RolsView;
+  public rolsView: RolsViewItem[];
 
   constructor(private rolService: RolService) { }
 
@@ -19,8 +21,9 @@ export class RolComponent implements OnInit {
 
   private getAllRols() {
     this.rolService.getAll().subscribe(response => {
-      this.rolsView = response;
+      this.response = _.cloneDeep(response);
     });
   }
+
 
 }
