@@ -10,6 +10,7 @@ namespace EatParser.Services.Config
 		{
 
 			CreateMap<Rol, ProductView>();
+			CreateMap<Set, ProductView>();
 
 
 			CreateMap<SignUpAccountView, User>()

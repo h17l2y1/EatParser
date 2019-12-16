@@ -29,6 +29,7 @@ namespace EatParser.Services.Config
 			services.AddScoped<IGrabberService, GrabberService>();
 			services.AddScoped<IAccountService, AccountService>();
 			services.AddScoped<IRolService, RolService>();
+			services.AddScoped<ISetService, SetService>();
 
 			// Providers;
 			services.AddScoped<IJwtProvider, JwtProvider>();
