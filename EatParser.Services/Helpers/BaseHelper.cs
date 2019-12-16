@@ -3,7 +3,9 @@ using EatParser.Entities.Entities;
 using EatParser.Services.Helpers.Interfaces;
 using EatParser.Services.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace EatParser.Services.Helpers
@@ -11,12 +13,18 @@ namespace EatParser.Services.Helpers
 	public class BaseHelper : IBaseHelper
 	{
 		protected IHtmlCollection<IElement> _divs;
+		private readonly Dictionary<char, char> _replacements;
+
+		public BaseHelper()
+		{
+			_replacements = SetDictionary();
+		}
 
 		public T CreatProduct<T>(string name, string desc, int? weight, int? count, int? price, string fullImg, int type) where T : Product
 		{
 			T product = (T)Activator.CreateInstance(typeof(T));
 
-			product.Name = name;
+			product.Name = Converter(name);
 			product.Description = desc;
 			product.Weight = weight;
 			product.Count = count;
@@ -123,5 +131,36 @@ namespace EatParser.Services.Helpers
 			}
 			return result;
 		}
+
+		private string Converter(string str)
+		{
+			var sb = new StringBuilder(str);
+			foreach (var kvp in _replacements)
+			{
+				sb.Replace(kvp.Key, kvp.Value);
+			}
+			return sb.ToString();
+		}
+
+		private Dictionary<char, char> SetDictionary()
+		{
+			Dictionary<char, char> Replacements = new Dictionary<char, char>()
+			{
+				['a'] = 'а',
+				['A'] = 'А',
+				['B'] = 'В',
+				['c'] = 'с',
+				['C'] = 'С',
+				['e'] = 'е',
+				['E'] = 'Е',
+				['H'] = 'Н',
+				['i'] = 'і',
+				['I'] = 'І',
+			};
+			return Replacements;
 	}
+
+
+
+}
 }
