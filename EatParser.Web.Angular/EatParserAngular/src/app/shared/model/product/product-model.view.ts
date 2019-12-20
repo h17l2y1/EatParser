@@ -5,5 +5,5 @@ export interface ProductView {
     count?: number;
     price?: number;
     image: string;
-    restaurantId: string;
+    restaurantId: number;
 }

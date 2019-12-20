@@ -27,6 +27,5 @@ namespace EatParser.Services.Services
 
 			return view;
 		}
-
 	}
 }

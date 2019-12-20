@@ -1,10 +1,28 @@
 <form>
-  <input type="search" placeholder="Search" (keyup)="setText($event.target.value)">
-  <!-- <button type="button" (click)="filter()">filter</button>   -->
+  <div class="func-container">
 
-  <app-slider *ngIf="response" ></app-slider>
+    <div class="func">
+      <form [formGroup]="dropDownForm">
+        <select formControlName="leaveList" class="form-control">
+          <option *ngFor="let item of leaveDropDown" [ngValue]="item">
+            {{item.name}}
+          </option>
+        </select>
+      </form>
+    </div>
 
+    <div class="func slider1">
+      <app-slider *ngIf="response"></app-slider>
+    </div>
+
+    <div class="func">
+      <input type="search" placeholder="Search" (keyup)="setText($event.target.value)">
+    </div>
+
+  </div>
 </form>
+
+
 
 <div class="cards-list" *ngIf="rolsView">
   <div *ngFor="let rol of rolsView">

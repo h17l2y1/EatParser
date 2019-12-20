@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+}
+
+.range-input {
+  margin-top: 5px;
+  width: 40px;
+}
+
+.text-left {
+  text-align: start;
+}
+
+.text-right {
+  text-align: end;
+}
+
+.test {
+  margin: 0px 10px;
+}
+
+::ng-deep {
+  .igx-input-group__bundle {
+    padding-top: 0;
+  }
+}

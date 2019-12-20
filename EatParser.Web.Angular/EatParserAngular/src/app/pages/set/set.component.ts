@@ -5,12 +5,13 @@ import * as _ from 'lodash';
 import { PriceRange } from 'src/app/shared/model/set/price-range.model';
 import { Subscription } from 'rxjs';
 import { SliderService } from 'src/app/shared/service/slider.service';
-
+import { RestaurantType } from 'src/app/shared/model/restauraunt-type';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-set',
   templateUrl: './set.component.html',
-  styleUrls: ['./set.component.css']
+  styleUrls: ['./set.component.scss']
 })
 export class SetComponent implements OnInit, OnDestroy {
 
@@ -19,6 +20,14 @@ export class SetComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public priceRange: PriceRange;
   public text: string;
+  public dropDownForm: FormGroup;
+
+  public leaveDropDown = [
+    { id: 0, name: 'Not selected' },
+    { id: 1, name: 'Sick' },
+    { id: 2, name: 'Day off' },
+    { id: 3, name: 'Vacation' }
+  ];
 
   constructor(private setService: SetService, private sliderService: SliderService) {
     this.subscription = sliderService.getRange()
@@ -44,6 +53,7 @@ export class SetComponent implements OnInit, OnDestroy {
       this.setPriceRange(response.rols);
       this.rolsView = response.rols;
       this.multiFilter();
+      this.dropDown();
     });
   }
 
@@ -76,11 +86,22 @@ export class SetComponent implements OnInit, OnDestroy {
     );
   }
 
-
   public sort(): void {
     // this.rolsView = _.sort(this.response.rols);
     this.rolsView = _.orderBy(this.rolsView, ['price', 'weight'], ['desc']);
 
   }
 
+  private dropDown(): void {
+    this.dropDownForm = new FormGroup({
+      leaveList: new FormControl(this.leaveDropDown[0]),
+    });
+
+    const bbb = _.groupBy(this.response.rols, 'restaurantId');
+
+    const aaa = this.rolsView.filter(x => x.restaurantId === RestaurantType.Mafia);
+  }
+
 }
+
+

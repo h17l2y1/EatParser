@@ -1,30 +1,17 @@
 <div class="container">
-  <label>Price Range Filter</label>
-</div>
-<div class="container">
 
-  <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="minValue" [maxValue]="maxValue" [lowerBound]="minValue"
-    [upperBound]="maxValue" [(ngModel)]="inputPriceRange" (click)="OnChange(inputPriceRange)" > 
+  <igx-input-group class="test">
+    <input class="range-input text-left" igxInput id="lowerInput" type="text" [ngModel]="inputPriceRange.lower"
+      (blur)="updatePriceRange($event.target)" />
+  </igx-input-group>
+
+  <igx-slider class="test" id="slider" [type]="sliderType.RANGE" [minValue]="minValue" [maxValue]="maxValue"
+    [lowerBound]="minValue" [upperBound]="maxValue" [(ngModel)]="inputPriceRange" (click)="OnChange(inputPriceRange)">
   </igx-slider>
 
-  <div class="wrapper">
+  <igx-input-group class="test">
+    <input class="range-input text-right" igxInput id="upperInput" type="text" [ngModel]="inputPriceRange.upper"
+      (blur)="updatePriceRange($event.target)" />
+  </igx-input-group>
 
-
-    <igx-input-group>
-      <input igxInput id="lowerInput" type="text" [ngModel]="inputPriceRange.lower"
-        (blur)="updatePriceRange($event.target)" />
-      <label igxLabel for="lowerInput">Lower price:</label>
-    </igx-input-group>
-
-
-
-    <igx-input-group>
-      <!-- [ngModel]="inputPriceRange.upper | currency" -->
-      <input igxInput id="upperInput" type="text" [ngModel]="inputPriceRange.upper"
-        (blur)="updatePriceRange($event.target)" />
-      <label igxLabel for="upperInput">Upper price:</label>
-    </igx-input-group>
-
-
-  </div>
 </div>

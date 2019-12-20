@@ -1,7 +1,9 @@
 .header {
-  background: #70fbfd;
+  background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
   padding: 30px;
   width: 100%;
   display: flex;
+  top: 0;
+  position: fixed;
+  z-index: 100;
 }
-
