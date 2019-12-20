@@ -1,10 +1,20 @@
 <form>
   <div class="func-container">
 
-    <div class="func">
-      <form [formGroup]="dropDownForm">
-        <select formControlName="leaveList" class="form-control">
-          <option *ngFor="let item of leaveDropDown" [ngValue]="item">
+    <div class="func" *ngIf="sortDropDownForm">
+      <form [formGroup]="sortDropDownForm">
+        <select formControlName="sortList" class="form-control" (ngModelChange)="multiFilter()">
+          <option *ngFor="let item of sortDropDown" [ngValue]="item">
+            {{item[0]}} _ {{item[1]}}
+          </option>
+        </select>
+      </form>
+    </div>
+
+    <div class="func" *ngIf="restDropDownForm">
+      <form [formGroup]="restDropDownForm">
+        <select formControlName="restaurauntList" class="form-control" (ngModelChange)="multiFilter()">
+          <option *ngFor="let item of typeDropDown" [ngValue]="item">
             {{item.name}}
           </option>
         </select>

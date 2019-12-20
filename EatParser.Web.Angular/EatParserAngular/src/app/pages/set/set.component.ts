@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { SliderService } from 'src/app/shared/service/slider.service';
 import { RestaurantType } from 'src/app/shared/model/restauraunt-type';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Resrauraunt } from 'src/app/shared/model/restauraunt-model';
 
 @Component({
   selector: 'app-set',
@@ -20,24 +21,21 @@ export class SetComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public priceRange: PriceRange;
   public text: string;
-  public dropDownForm: FormGroup;
+  public restDropDownForm: FormGroup;
+  public sortDropDownForm: FormGroup;
 
-  public leaveDropDown = [
-    { id: 0, name: 'Not selected' },
-    { id: 1, name: 'Sick' },
-    { id: 2, name: 'Day off' },
-    { id: 3, name: 'Vacation' }
-  ];
+  public typeDropDown: Resrauraunt[];
+  public sortDropDown: Array<Array<string>>;
 
   constructor(private setService: SetService, private sliderService: SliderService) {
-    this.subscription = sliderService.getRange()
-    .subscribe(priceRange => {
+    this.subscription = sliderService.getRange().subscribe(priceRange => {
       this.priceRange = priceRange;
       this.multiFilter();
     });
   }
 
   ngOnInit() {
+    this.initSortDropDown();
     this.getAllSets();
   }
 
@@ -52,8 +50,8 @@ export class SetComponent implements OnInit, OnDestroy {
       this.response = _.cloneDeep(response);
       this.setPriceRange(response.rols);
       this.rolsView = response.rols;
+      this.initRestaurauntDropDown();
       this.multiFilter();
-      this.dropDown();
     });
   }
 
@@ -69,37 +67,79 @@ export class SetComponent implements OnInit, OnDestroy {
 
   public multiFilter(): void {
     if (!this.text && !this.priceRange) {
-      this.rolsView = _.cloneDeep(this.response.rols);
+      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+        this.rolsView = _.cloneDeep(this.response.rols);
+        this.sort();
+        return;
+      }
+      this.rolsView = this.response.rols.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+      this.sort();
       return;
     }
+
     if (this.text && !this.priceRange) {
-      this.rolsView = this.response.rols.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase()));
+      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+        this.rolsView = this.response.rols.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase()));
+        this.sort();
+        return;
+      }
+      this.rolsView = this.response.rols.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase())
+        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+      this.sort();
       return;
     }
+
     if (this.priceRange && !this.text) {
-      this.rolsView = this.response.rols.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper);
+      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+        this.rolsView = this.response.rols.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper);
+        this.sort();
+        return;
+      }
+      this.rolsView = this.response.rols.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper
+        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+      this.sort();
       return;
     }
+
     this.rolsView = this.response.rols.filter(
       rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
-      rol.name.toLowerCase().includes(this.text.toLowerCase())
+      rol.name.toLowerCase().includes(this.text.toLowerCase()) &&
+      rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id
     );
+    this.sort();
   }
 
   public sort(): void {
-    // this.rolsView = _.sort(this.response.rols);
-    this.rolsView = _.orderBy(this.rolsView, ['price', 'weight'], ['desc']);
-
+    const param = this.sortDropDownForm.controls.sortList.value[0];
+    const type = this.sortDropDownForm.controls.sortList.value[1];
+    this.rolsView = _.orderBy(this.rolsView, [param, 'weight'], [type]);
   }
 
-  private dropDown(): void {
-    this.dropDownForm = new FormGroup({
-      leaveList: new FormControl(this.leaveDropDown[0]),
+  private initSortDropDown(): void {
+    this.sortDropDown = [['price', 'desc'], ['price', 'asc'], ['count', 'desc'], ['count', 'asc']];
+
+    this.sortDropDownForm = new FormGroup({
+      sortList: new FormControl(this.sortDropDown[0]),
     });
+  }
 
-    const bbb = _.groupBy(this.response.rols, 'restaurantId');
+  private initRestaurauntDropDown(): void {
+    this.getRestauraunts(this.response.rols);
 
-    const aaa = this.rolsView.filter(x => x.restaurantId === RestaurantType.Mafia);
+    this.restDropDownForm = new FormGroup({
+      restaurauntList: new FormControl(this.typeDropDown[0]),
+    });
+  }
+
+  private getRestauraunts(rols: RolsViewItem[]): void {
+    this.typeDropDown = new Array<Resrauraunt>();
+    const mappedArray = rols.map(x => x.restaurantId);
+    const typesArray = mappedArray.filter((n, i) => mappedArray.indexOf(n) === i);
+
+    for (let i = 0; i < typesArray.length; i++) {
+      this.typeDropDown.push(new Resrauraunt(i, RestaurantType[i]));
+    }
+
   }
 
 }
