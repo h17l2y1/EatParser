@@ -11,13 +11,16 @@ namespace EatParser.DataAccess.Config
 	{
 		public static void InjectDataAccessDependency(this IServiceCollection services, IConfiguration configuration)
 		{
+			// hard code
+			string section = "ConnectionStringsHome:DefaultConnection";
+
 			services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<ApplicationContext>();
 
-			services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(configuration.GetSection("ConnectionStringsHome:DefaultConnection").Value));
+			services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(configuration.GetSection(section).Value));
+
 			services.Configure<ConnectionStrings>(x => configuration.GetSection("ConnectionStringsHome").Bind(x));
 
 
-			// Dapper Repository
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IRolSetRepository, RolSetRepository>();
 

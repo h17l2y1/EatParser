@@ -19,10 +19,13 @@ namespace EatParser.Api
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.InjectBusinessLogicDependency(Configuration);
+			//services.InjectBusinessLogicDependency(Configuration);
 
-			AuthenticationExtension.Add(services, Configuration);
-			CorsExtension.Add(services);
+			services.InjectExtension(Configuration);
+
+			//ElasticSearchExtension.InjectElasticSearch(services, Configuration);
+			AuthenticationExtension.InjectAuthentication(services, Configuration);
+			//CorsExtension.InjectCors(services);
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}

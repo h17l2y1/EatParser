@@ -4,7 +4,7 @@ namespace EatParser.Api.Extension
 {
 	public class CorsExtension
 	{
-		public static void Add(IServiceCollection services)
+		public void InjectCors(IServiceCollection services)
 		{
 			services.AddCors(options =>
 			{

@@ -1,5 +1,5 @@
-﻿using EatParser.Entities.Entities;
-using EatParser.Services.Providers.Interfaces;
+﻿using System;
+using EatParser.Entities.Entities;
 using EatParser.Services.Services.Interfaces;
 using Nest;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Services
 {
-	public class ElasticService : IEsService
+	public class ElasticService : IElasticService
 	{
 		private readonly IElasticClient _elasticClient;
 
@@ -17,57 +17,17 @@ namespace EatParser.Services.Services
 			_elasticClient = elasticElasticClient;
 		}
 
-		public async Task<IndexResponse> Index()
-		{
-			var person = new Person { 
-				Id = 1, 
-				FirstName = "Martijn", 
-				LastName = "Laarman" 
-			};
-
-			IndexResponse indexResponse = await _elasticClient.IndexDocumentAsync(person);
-
-			if (!indexResponse.IsValid)
-			{
-				var ex = indexResponse.OriginalException;
-				var debEx = indexResponse.DebugInformation;
-			}
-
-			return indexResponse;
-		}
-
-		public async Task<BulkResponse> IndexMany()
-		{
-			List<Person> personList = new List<Person>()
-			{
-				new Person { Id = 2, FirstName = "Ronaldo", LastName = "Cristiano" },
-				new Person { Id = 3, FirstName = "David", LastName = "Beckham" },
-				new Person { Id = 4, FirstName = "Leonel", LastName = "Messi" },
-			};
-
-			BulkResponse indexManyResponse = await _elasticClient.IndexManyAsync(personList);
-
-			if (!indexManyResponse.IsValid)
-			{
-				var ex = indexManyResponse.OriginalException;
-				var debEx = indexManyResponse.DebugInformation;
-			}
-
-			return indexManyResponse;
-		}
-
-
-		public async Task<BulkResponse> NewIndexMany<T>(List<T> list) where T : class
+		public async Task<BulkResponse> IndexMany<T>(List<T> list) where T : class
 		{
 			var index = typeof(T);
 
 			BulkResponse bulkResponse = await _elasticClient.BulkAsync(b => b
-													  .Index(index)
-													  .IndexMany(list));
+															.Index(index)
+															.IndexMany(list));
 
 			if (!bulkResponse.IsValid)
 			{
-				var ex = bulkResponse.OriginalException;
+				Exception ex = bulkResponse.OriginalException;
 				var debEx = bulkResponse.DebugInformation;
 			}
 
@@ -75,21 +35,21 @@ namespace EatParser.Services.Services
 
 		}
 
-		public async Task<IndexResponse> NewIndexOne<T>(T single) where T : class
+		public async Task<IndexResponse> IndexOne<T>(T single) where T : class
 		{
 			var index = typeof(T);
 			IndexResponse indexResp = await _elasticClient.IndexAsync(single, i => i.Index(index));
 
 			if (!indexResp.IsValid)
 			{
-				var ex = indexResp.OriginalException;
+				Exception ex = indexResp.OriginalException;
 				var debEx = indexResp.DebugInformation;
 			}
 
 			return indexResp;
 		}
 
-
+		// not dynamic
 		public async Task<IReadOnlyCollection<Person>> Search(string type)
 		{
 			ISearchResponse<Person> searchResponse = await _elasticClient.SearchAsync<Person>(s => s
@@ -106,63 +66,5 @@ namespace EatParser.Services.Services
 			return people;
 		}
 
-		public async Task<IndexResponse> IndexFile()
-		{
-			string path = @"C:\Users\Anuitex - 79\Desktop\";
-			string file = "file1.txt";
-
-
-			string fileData = GetFileData(path, file);
-			Document doc = new Document()
-			{
-				Name = file,
-				Path = path,
-				Data = fileData
-			};
-
-			IndexResponse indexResponse = await _elasticClient.IndexDocumentAsync(doc);
-
-			return indexResponse;
-
-		}
-
-		public async Task<IReadOnlyCollection<Document>> SearchInFile(string type)
-		{
-			ISearchResponse<Document> searchResponse = await _elasticClient.SearchAsync<Document>(s => s
-					.From(0)
-					.Size(10)
-					.Query(q => q
-						.Match(m => m.Field(f => f.Data)
-						.Query(type)
-						)
-					)
-			);
-
-			IReadOnlyCollection<Document> doc = searchResponse.Documents;
-			return doc;
-		}
-
-
-		private string GetFileData(string path, string fileName)
-		{
-			string fullpath = $@"{path}\{fileName}";
-			string fileData = default;
-
-			if (File.Exists(fullpath))
-			{
-				fileData = File.ReadAllText(fullpath);
-				return fileData;
-			}
-
-			return fileData;
-		}
 	}
-
-	public class Document
-	{
-		public string Name { get; set; }
-		public string Path { get; set; }
-		public string Data { get; set; }
-	}
-
 }

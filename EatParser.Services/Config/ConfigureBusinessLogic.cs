@@ -23,13 +23,12 @@ namespace EatParser.Services.Config
 
 			// Singleton
 			services.AddSingleton(mapper);
-			services.AddSingleton<IEsClientProvider, EsClientProvider>();
 
 			// Services;
 			services.AddScoped<IGrabberService, GrabberService>();
 			services.AddScoped<IAccountService, AccountService>();
 			services.AddScoped<IRolSetService, RolSetService>();
-			services.AddScoped<IEsService, EsService>();
+			services.AddScoped<IElasticService, ElasticService>();
 
 			// Providers;
 			services.AddScoped<IYaposhkaProvider, YaposhkaProvider>();
@@ -40,9 +39,6 @@ namespace EatParser.Services.Config
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();
 			services.AddScoped<IYaposhkaHelper, YaposhkaHelper>();
 			services.AddScoped<IMafiaHelper , MafiaHelper>();
-
-
-			services.InjectDataAccessDependency(сonfiguration);
 
 		}
 

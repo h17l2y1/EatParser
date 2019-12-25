@@ -13,7 +13,7 @@ namespace EatParser.Api.Extension
 {
 	public class AuthenticationExtension
 	{
-		public static void Add(IServiceCollection services, IConfiguration configuration)
+		public static void InjectAuthentication(IServiceCollection services, IConfiguration configuration)
 		{
 			services.Configure<AuthOptions>(configuration.GetSection("AuthOptions"));
 
