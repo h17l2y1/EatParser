@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Services.Interfaces
 {
-	public interface IEsService
+	public interface IElasticService
 	{
 		Task<IReadOnlyCollection<Person>> Search(string type);
 
@@ -16,5 +16,11 @@ namespace EatParser.Services.Services.Interfaces
 		Task<IndexResponse> IndexFile();
 
 		Task<IReadOnlyCollection<Document>> SearchInFile(string type);
+
+		Task<BulkResponse> NewIndexMany<T>(List<T> list) where T : class;
+
+		Task<IndexResponse> NewIndexOne<T>(T single) where T : class;
+
+		
 	}
 }

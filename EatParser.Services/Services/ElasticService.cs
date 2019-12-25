@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Services
 {
-	public class EsService : IEsService
+	public class ElasticService : IEsService
 	{
-		private readonly ElasticClient _client;
+		private readonly IElasticClient _elasticClient;
 
-		public EsService(IEsClientProvider clientProvider)
+		public ElasticService(IElasticClient elasticElasticClient)
 		{
-			_client = clientProvider.GetClient();
+			_elasticClient = elasticElasticClient;
 		}
 
 		public async Task<IndexResponse> Index()
@@ -25,7 +25,7 @@ namespace EatParser.Services.Services
 				LastName = "Laarman" 
 			};
 
-			IndexResponse indexResponse = await _client.IndexDocumentAsync(person);
+			IndexResponse indexResponse = await _elasticClient.IndexDocumentAsync(person);
 
 			if (!indexResponse.IsValid)
 			{
@@ -45,8 +45,7 @@ namespace EatParser.Services.Services
 				new Person { Id = 4, FirstName = "Leonel", LastName = "Messi" },
 			};
 
-			BulkResponse indexManyResponse = await _client.IndexManyAsync(personList);
-
+			BulkResponse indexManyResponse = await _elasticClient.IndexManyAsync(personList);
 
 			if (!indexManyResponse.IsValid)
 			{
@@ -57,9 +56,43 @@ namespace EatParser.Services.Services
 			return indexManyResponse;
 		}
 
+
+		public async Task<BulkResponse> NewIndexMany<T>(List<T> list) where T : class
+		{
+			var index = typeof(T);
+
+			BulkResponse bulkResponse = await _elasticClient.BulkAsync(b => b
+													  .Index(index)
+													  .IndexMany(list));
+
+			if (!bulkResponse.IsValid)
+			{
+				var ex = bulkResponse.OriginalException;
+				var debEx = bulkResponse.DebugInformation;
+			}
+
+			return bulkResponse;
+
+		}
+
+		public async Task<IndexResponse> NewIndexOne<T>(T single) where T : class
+		{
+			var index = typeof(T);
+			IndexResponse indexResp = await _elasticClient.IndexAsync(single, i => i.Index(index));
+
+			if (!indexResp.IsValid)
+			{
+				var ex = indexResp.OriginalException;
+				var debEx = indexResp.DebugInformation;
+			}
+
+			return indexResp;
+		}
+
+
 		public async Task<IReadOnlyCollection<Person>> Search(string type)
 		{
-			ISearchResponse<Person> searchResponse = await _client.SearchAsync<Person>(s => s
+			ISearchResponse<Person> searchResponse = await _elasticClient.SearchAsync<Person>(s => s
 					.From(0)
 					.Size(10)
 					.Query(q => q
@@ -87,7 +120,7 @@ namespace EatParser.Services.Services
 				Data = fileData
 			};
 
-			IndexResponse indexResponse = await _client.IndexDocumentAsync(doc);
+			IndexResponse indexResponse = await _elasticClient.IndexDocumentAsync(doc);
 
 			return indexResponse;
 
@@ -95,7 +128,7 @@ namespace EatParser.Services.Services
 
 		public async Task<IReadOnlyCollection<Document>> SearchInFile(string type)
 		{
-			ISearchResponse<Document> searchResponse = await _client.SearchAsync<Document>(s => s
+			ISearchResponse<Document> searchResponse = await _elasticClient.SearchAsync<Document>(s => s
 					.From(0)
 					.Size(10)
 					.Query(q => q
