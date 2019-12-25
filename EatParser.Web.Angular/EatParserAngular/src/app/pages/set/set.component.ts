@@ -136,7 +136,7 @@ export class SetComponent implements OnInit, OnDestroy {
     const mappedArray = rols.map(x => x.restaurantId);
     const typesArray = mappedArray.filter((n, i) => mappedArray.indexOf(n) === i);
 
-    for (let i = 0; i < typesArray.length; i++) {
+    for (let i = 0; i < typesArray.length + 1; i++) {
       this.typeDropDown.push(new Resrauraunt(i, RestaurantType[i]));
     }
 
