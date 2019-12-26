@@ -30,6 +30,8 @@ namespace EatParser.Services.Config
 			services.AddScoped<IAccountService, AccountService>();
 			services.AddScoped<IRolService, RolService>();
 			services.AddScoped<ISetService, SetService>();
+			services.AddScoped<ISushiService, SushiService>();
+			services.AddScoped<IPizzaService, PizzaService>();
 
 			// Providers;
 			services.AddScoped<IJwtProvider, JwtProvider>();

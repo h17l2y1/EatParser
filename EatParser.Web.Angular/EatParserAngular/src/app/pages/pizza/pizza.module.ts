@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SetComponent } from './set.component';
-import { SetRoutes } from './set.routing';
+import { PizzaComponent } from './pizza.component';
+import { PizzaRoutes } from './pizza.routing';
 import { IgxInputGroupModule, IgxSliderModule } from 'igniteui-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { SliderModule } from 'src/app/shared/components/slider/slider.module';
 @NgModule({
   imports: [
     CommonModule,
-    SetRoutes,
+    PizzaRoutes,
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -21,7 +21,7 @@ import { SliderModule } from 'src/app/shared/components/slider/slider.module';
     SliderModule
   ],
   declarations: [
-    SetComponent,
+    PizzaComponent
   ]
 })
-export class SetModule { }
+export class PizzaModule { }

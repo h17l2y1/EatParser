@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RolsView } from '../model/rol/rols.view';
+import { SetsView } from '../model/set/sets-view';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class SetService {
 
   constructor(private http: HttpClient) { }
 
-  public getAll(): Observable<RolsView> {
-    return this.http.get<RolsView>(this.rootUrl + 'Set/GetAll');
+  public getAll(): Observable<SetsView> {
+    return this.http.get<SetsView>(this.rootUrl + 'Set/GetAll');
   }
 
 }

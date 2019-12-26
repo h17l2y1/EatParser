@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using EatParser.Services.Services.Interfaces;
-using EatParser.ViewModels;
+﻿using EatParser.Services.Services.Interfaces;
+using EatParser.ViewModels.Set;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EatParser.Api.Controllers
 {
@@ -19,7 +19,7 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			GetAllRolView view = await _service.GetAllSetsAsync();
+			GetAllSetView view = await _service.GetAllSetsAsync();
 			return Ok(view);
 		}
 

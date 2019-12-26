@@ -1,5 +1,5 @@
 ﻿using EatParser.Services.Services.Interfaces;
-using EatParser.ViewModels.Rol;
+using EatParser.ViewModels.Sushi;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,11 +7,11 @@ namespace EatParser.Api.Controllers
 {
 	[Route("api/[controller]/[action]")]
 	[ApiController]
-	public class RolController : ControllerBase
+	public class SushiController : ControllerBase
 	{
-		private readonly IRolService _service;
+		private readonly ISushiService _service;
 
-		public RolController(IRolService service)
+		public SushiController(ISushiService service)
 		{
 			_service = service;
 		}
@@ -19,9 +19,8 @@ namespace EatParser.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			GetAllRolView view = await _service.GetAllSetsAsync();
+			GetAllSushiView view = await _service.GetAllSetsAsync();
 			return Ok(view);
 		}
-
 	}
 }

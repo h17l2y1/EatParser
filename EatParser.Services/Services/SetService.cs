@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using EatParser.DataAccess.Repositories.Interfaces;
 using EatParser.Services.Services.Interfaces;
-using EatParser.ViewModels;
+using EatParser.ViewModels.Set;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Services
@@ -19,11 +18,11 @@ namespace EatParser.Services.Services
 			_setRepository = setRepository;
 		}
 
-		public async Task<GetAllRolView> GetAllSetsAsync()
+		public async Task<GetAllSetView> GetAllSetsAsync()
 		{
 			var listEntity = await _setRepository.GetAll();
-			var model = _mapper.Map<List<ProductView>>(listEntity);
-			GetAllRolView view = new GetAllRolView(model);
+			var model = _mapper.Map<List<GetAllSetViewItem>>(listEntity);
+			GetAllSetView view = new GetAllSetView(model);
 
 			return view;
 		}

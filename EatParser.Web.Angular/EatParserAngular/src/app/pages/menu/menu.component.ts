@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RolService } from 'src/app/shared/service/rol.service';
 
 @Component({
   selector: 'app-menu',

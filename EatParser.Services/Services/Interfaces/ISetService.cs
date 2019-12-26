@@ -1,11 +1,10 @@
-﻿using EatParser.ViewModels;
+﻿using EatParser.ViewModels.Set;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Services.Interfaces
 {
 	public interface ISetService
 	{
-		Task<GetAllRolView> GetAllSetsAsync();
-
+		Task<GetAllSetView> GetAllSetsAsync();
 	}
 }

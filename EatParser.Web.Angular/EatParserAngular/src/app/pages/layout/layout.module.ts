@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([]),
-    // FlexLayoutModule
   ],
   exports: [
     MainLayoutComponent,

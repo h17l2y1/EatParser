@@ -15,6 +15,5 @@ namespace EatParser.ViewModels.Set
 
 	public class GetAllSetViewItem : ProductView
 	{
-
 	}
 }

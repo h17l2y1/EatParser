@@ -1,31 +1,30 @@
 ﻿using AutoMapper;
 using EatParser.DataAccess.Repositories.Interfaces;
 using EatParser.Services.Services.Interfaces;
-using EatParser.ViewModels.Rol;
+using EatParser.ViewModels.Pizza;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Services
 {
-	public class RolService : IRolService
+	public class PizzaService : IPizzaService
 	{
 		private readonly IMapper _mapper;
-		private readonly IRolRepository _roleSetRepository;
+		private readonly IPizzaRepository _roleSetRepository;
 
-		public RolService(IMapper mapper, IRolRepository roleSetRepository)
+		public PizzaService(IMapper mapper, IPizzaRepository roleSetRepository)
 		{
 			_mapper = mapper;
 			_roleSetRepository = roleSetRepository;
 		}
 
-		public async Task<GetAllRolView> GetAllSetsAsync()
+		public async Task<GetAllPizzaView> GetAllSetsAsync()
 		{
 			var listEntity = await _roleSetRepository.GetAll();
-			var model = _mapper.Map<List<GetAllRolViewItem>>(listEntity);
-			GetAllRolView view = new GetAllRolView(model);
+			var model = _mapper.Map<List<GetAllPizzaViewItem>>(listEntity);
+			GetAllPizzaView view = new GetAllPizzaView(model);
 
 			return view;
 		}
-
 	}
 }

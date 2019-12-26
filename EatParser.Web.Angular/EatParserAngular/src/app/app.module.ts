@@ -9,6 +9,8 @@ import { RolModule } from './pages/rol/rol.module';
 import { SetModule } from './pages/set/set.module';
 import { LayoutModule } from './pages/layout/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PizzaModule } from './pages/pizza/pizza.module';
+import { SushiModule } from './pages/sushi/sushi.module';
 
 const routes: Routes = [
   {
@@ -30,6 +32,8 @@ const routes: Routes = [
     MenuModule,
     RolModule,
     SetModule,
+    SushiModule,
+    PizzaModule,
     BrowserAnimationsModule
   ],
   providers: [],

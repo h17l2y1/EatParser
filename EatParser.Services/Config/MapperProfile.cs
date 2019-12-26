@@ -1,6 +1,9 @@
 ﻿using EatParser.Entities.Entities;
-using EatParser.ViewModels;
 using EatParser.ViewModels.Account.Request;
+using EatParser.ViewModels.Pizza;
+using EatParser.ViewModels.Rol;
+using EatParser.ViewModels.Set;
+using EatParser.ViewModels.Sushi;
 
 namespace EatParser.Services.Config
 {
@@ -9,8 +12,10 @@ namespace EatParser.Services.Config
 		public MapperProfile()
 		{
 
-			CreateMap<Rol, ProductView>();
-			CreateMap<Set, ProductView>();
+			CreateMap<Rol, GetAllRolViewItem>();
+			CreateMap<Set, GetAllSetViewItem>();
+			CreateMap<Sushi, GetAllSushiViewItem>();
+			CreateMap<Pizza, GetAllPizzaViewItem>();
 
 
 			CreateMap<SignUpAccountView, User>()

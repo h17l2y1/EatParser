@@ -32,15 +32,17 @@
   </div>
 </form>
 
-<div class="cards-list" *ngIf="setView">
-  <div *ngFor="let set of setView">
+
+
+<div class="cards-list" *ngIf="sushiView">
+  <div *ngFor="let sushi of sushiView">
     <div class="card">
       <div class="card_image">
-        <img src={{set.image}} />
+        <img src={{sushi.image}} />
       </div>
       <div class="card_title title-white">
-        <p>{{set.name}}</p>
-        <p>{{set.weight}}гр/{{set.count}}шт - {{set.price}} грн</p>
+        <p>{{sushi.name}}</p>
+        <p>{{sushi.weight}}гр/{{sushi.count}}шт - {{sushi.price}} грн</p>
         <p></p>
       </div>
     </div>
