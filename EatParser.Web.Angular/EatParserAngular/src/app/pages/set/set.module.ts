@@ -3,15 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SetComponent } from './set.component';
 import { SetRoutes } from './set.routing';
 import { IgxInputGroupModule, IgxSliderModule } from 'igniteui-angular';
-import { SliderComponent } from 'src/app/shared/components/slider/slider.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SliderModule } from 'src/app/shared/components/slider/slider.module';
 
 @NgModule({
   declarations: [
     SetComponent,
-    SliderComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     FormsModule,
     IgxInputGroupModule,
-    IgxSliderModule
+    IgxSliderModule,
+    SliderModule
   ]
 })
 export class SetModule { }

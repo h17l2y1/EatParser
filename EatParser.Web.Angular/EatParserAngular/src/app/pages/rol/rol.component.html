@@ -1,15 +1,47 @@
 <form>
-  <!-- <input type="search" placeholder="Search" (keyup)="search($event.target.value)"> -->
+  <div class="func-container">
+
+    <div class="func" *ngIf="sortDropDownForm">
+      <form [formGroup]="sortDropDownForm">
+        <select formControlName="sortList" class="form-control" (ngModelChange)="multiFilter()">
+          <option *ngFor="let item of sortDropDown" [ngValue]="item">
+            {{item[0]}} _ {{item[1]}}
+          </option>
+        </select>
+      </form>
+    </div>
+
+    <div class="func" *ngIf="restDropDownForm">
+      <form [formGroup]="restDropDownForm">
+        <select formControlName="restaurauntList" class="form-control" (ngModelChange)="multiFilter()">
+          <option *ngFor="let item of typeDropDown" [ngValue]="item">
+            {{item.name}}
+          </option>
+        </select>
+      </form>
+    </div>
+
+    <div class="func slider1">
+      <app-slider *ngIf="response"></app-slider>
+    </div>
+ 
+    <div class="func">
+      <input type="search" placeholder="Search" (keyup)="setText($event.target.value)">
+    </div>
+
+  </div>
 </form>
 
-<div class="cards-list" *ngIf="rolsView">
-  <div *ngFor="let rol of rolsView">
+<div class="cards-list" *ngIf="rolView">
+  <div *ngFor="let rol of rolView">
     <div class="card">
       <div class="card_image">
         <img src={{rol.image}} />
       </div>
       <div class="card_title title-white">
         <p>{{rol.name}}</p>
+        <p>{{rol.weight}}гр/{{rol.count}}шт - {{rol.price}} грн</p>
+        <p></p>
       </div>
     </div>
   </div>

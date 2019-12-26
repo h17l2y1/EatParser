@@ -34,15 +34,15 @@
 
 
 
-<div class="cards-list" *ngIf="rolsView">
-  <div *ngFor="let rol of rolsView">
+<div class="cards-list" *ngIf="setView">
+  <div *ngFor="let set of setView">
     <div class="card">
       <div class="card_image">
-        <img src={{rol.image}} />
+        <img src={{set.image}} />
       </div>
       <div class="card_title title-white">
-        <p>{{rol.name}}</p>
-        <p>{{rol.weight}}гр/{{rol.count}}шт - {{rol.price}} грн</p>
+        <p>{{set.name}}</p>
+        <p>{{set.weight}}гр/{{set.count}}шт - {{set.price}} грн</p>
         <p></p>
       </div>
     </div>
