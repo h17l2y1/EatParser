@@ -19,6 +19,8 @@ namespace EatParser.Entities.Entities
 
 		public int RestaurantId { get; set; }
 
+		public string Logo { get; set; }
+
 		[ForeignKey("RestaurantId")]
 		[NotMapped]
 		[Computed]

@@ -31,8 +31,9 @@ namespace EatParser.Services.Helpers
 			int? price = StringToInt(priceStr);
 			string name = GetData(td, "img.product-image", "title");
 			string desc = "";
+			string logo = GetLogoPath(RestaurantType.SushiPapa.ToString());
 
-			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImage, (int)RestaurantType.SushiPapa);
+			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImage, (int)RestaurantType.SushiPapa, logo);
 
 			return product;
 		}

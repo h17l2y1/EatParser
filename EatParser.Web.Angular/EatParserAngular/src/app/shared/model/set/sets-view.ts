@@ -16,5 +16,6 @@ export class SetsViewItem implements ProductView {
     price?: number;
     image: string;
     restaurantId: number;
+    logo: string;
 }
 

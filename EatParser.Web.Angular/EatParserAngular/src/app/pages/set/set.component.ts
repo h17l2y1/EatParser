@@ -27,6 +27,15 @@ export class SetComponent implements OnInit, OnDestroy {
   public typeDropDown: Resrauraunt[];
   public sortDropDown: Array<Array<string>>;
 
+  public yaposhkaClass = 'card-heared yaposhka';
+  public mafiaClass = 'card-heared mafia';
+
+  public isYaposhka = false;
+  public isMafia = true;
+
+
+
+
   constructor(private setService: SetService, private sliderService: SliderService) {
     this.subscription = sliderService.getRange().subscribe(priceRange => {
       this.priceRange = priceRange;
@@ -43,6 +52,22 @@ export class SetComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  public getClass(set: SetsViewItem): string {
+    if (set.restaurantId === 1) {
+      return 'card-heared mafia';
+    }
+    if (set.restaurantId === 2) {
+      return 'card-heared yaposhka';
+    }
+    if (set.restaurantId === 3) {
+      return 'card-heared sushiPapa';
+    }
+    if (set.restaurantId === 4) {
+      return 'card-heared rollClub';
+    }
+    return 'card-heared';
   }
 
   private getAllSets() {

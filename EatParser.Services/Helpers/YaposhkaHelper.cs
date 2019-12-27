@@ -34,8 +34,10 @@ namespace EatParser.Services.Helpers
 			int? price = StringToInt(priceStr);
 			int? count = countStr == null ? 0 : StringToInt(countStr); ;
 			int? weight = StringToInt(weightStr);
+			string logo = GetLogoPath(RestaurantType.Yaposhka.ToString());
 
-			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka);
+
+			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka, logo);
 
 			return product;
 		}

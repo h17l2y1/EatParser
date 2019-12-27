@@ -2,6 +2,7 @@
   background: linear-gradient(135deg, rgba(247, 202, 201, 1) 0%, rgba(146, 168, 209, 1) 100%);
   display: flex;
   margin-top: 87px;
+  min-height: calc(100vh - 174px);
 }
 
 .sidebar {

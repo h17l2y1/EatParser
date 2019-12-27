@@ -37,8 +37,9 @@ namespace EatParser.Services.Helpers
 			TempSet set = CreateTempSet(test);
 
 			int? price = StringToInt(priceStr);
+			string logo = GetLogoPath(RestaurantType.Mafia.ToString());
 
-			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImg, (int)RestaurantType.Mafia);
+			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImg, (int)RestaurantType.Mafia, logo);
 
 			return product;
 		}
