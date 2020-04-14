@@ -13,8 +13,8 @@ namespace EatParser.DataAccess.Config
 		{
 			services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<ApplicationContext>();
 
-			services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(configuration.GetSection("ConnectionStringsGoogle:DefaultConnection").Value));
-			services.Configure<ConnectionStrings>(x => configuration.GetSection("ConnectionStringsGoogle").Bind(x));
+			services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(configuration.GetSection("ConnectionStrings:DefaultConnection").Value));
+			services.Configure<ConnectionStrings>(x => configuration.GetSection("ConnectionStrings").Bind(x));
 
 
 			// Dapper Repository

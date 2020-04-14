@@ -12,8 +12,7 @@
 
 <form>
   <div class="func-container">
-
-
+    
     <div class="func sel sel--black-panther" *ngIf="sortDropDownForm">
       <form [formGroup]="sortDropDownForm">
         <select formControlName="sortList" class="form-control" (ngModelChange)="multiFilter()" name="select-profession" id="select-profession">
