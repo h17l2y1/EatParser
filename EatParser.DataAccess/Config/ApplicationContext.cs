@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EatParser.DataAccess.Config
 {
-	public class ApplicationContext : IdentityDbContext<User, UserRole, int>
+	public class ApplicationContext : IdentityDbContext<User, UserRole, string>
 	{
 		public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
 		{
@@ -23,16 +23,16 @@ namespace EatParser.DataAccess.Config
 
 		public DbSet<Restaurant> Restaurants { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			var init = new AutoComplete();
+		//protected override void OnModelCreating(ModelBuilder builder)
+		//{
+		//	var init = new AutoComplete();
 
-			var list = init.CreateRestaurant().ToArray();
+		//	var list = init.CreateRestaurant().ToArray();
 
-			builder.Entity<Restaurant>().HasData(list);
+		//	builder.Entity<Restaurant>().HasData(list);
 
-			base.OnModelCreating(builder);
-		}
+		//	base.OnModelCreating(builder);
+		//}
 	}
 
 }

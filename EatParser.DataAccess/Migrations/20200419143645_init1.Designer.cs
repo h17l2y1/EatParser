@@ -10,22 +10,21 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EatParser.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191206151318_init")]
-    partial class init
+    [Migration("20200419143645_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EatParser.Entities.Entities.Pizza", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Count");
 
@@ -35,13 +34,15 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("Image");
 
+                    b.Property<string>("Logo");
+
                     b.Property<string>("Name");
 
-                    b.Property<int>("Price");
+                    b.Property<int?>("Price");
 
                     b.Property<int>("RestaurantId");
 
-                    b.Property<int>("Weight");
+                    b.Property<int?>("Weight");
 
                     b.HasKey("Id");
 
@@ -50,9 +51,8 @@ namespace EatParser.DataAccess.Migrations
 
             modelBuilder.Entity("EatParser.Entities.Entities.Restaurant", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreationDate");
 
@@ -61,18 +61,12 @@ namespace EatParser.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
-
-                    b.HasData(
-                        new { Id = 1, CreationDate = new DateTime(2019, 12, 6, 15, 13, 18, 757, DateTimeKind.Utc), Name = "Mafia" },
-                        new { Id = 2, CreationDate = new DateTime(2019, 12, 6, 15, 13, 18, 757, DateTimeKind.Utc), Name = "Yaposhka" }
-                    );
                 });
 
             modelBuilder.Entity("EatParser.Entities.Entities.Rol", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Count");
 
@@ -82,13 +76,15 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("Image");
 
+                    b.Property<string>("Logo");
+
                     b.Property<string>("Name");
 
-                    b.Property<int>("Price");
+                    b.Property<int?>("Price");
 
                     b.Property<int>("RestaurantId");
 
-                    b.Property<int>("Weight");
+                    b.Property<int?>("Weight");
 
                     b.HasKey("Id");
 
@@ -97,9 +93,8 @@ namespace EatParser.DataAccess.Migrations
 
             modelBuilder.Entity("EatParser.Entities.Entities.Set", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Count");
 
@@ -109,13 +104,15 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("Image");
 
+                    b.Property<string>("Logo");
+
                     b.Property<string>("Name");
 
-                    b.Property<int>("Price");
+                    b.Property<int?>("Price");
 
                     b.Property<int>("RestaurantId");
 
-                    b.Property<int>("Weight");
+                    b.Property<int?>("Weight");
 
                     b.HasKey("Id");
 
@@ -124,9 +121,8 @@ namespace EatParser.DataAccess.Migrations
 
             modelBuilder.Entity("EatParser.Entities.Entities.Sushi", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Count");
 
@@ -136,13 +132,15 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("Image");
 
+                    b.Property<string>("Logo");
+
                     b.Property<string>("Name");
 
-                    b.Property<int>("Price");
+                    b.Property<int?>("Price");
 
                     b.Property<int>("RestaurantId");
 
-                    b.Property<int>("Weight");
+                    b.Property<int?>("Weight");
 
                     b.HasKey("Id");
 
@@ -151,9 +149,8 @@ namespace EatParser.DataAccess.Migrations
 
             modelBuilder.Entity("EatParser.Entities.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
@@ -207,9 +204,8 @@ namespace EatParser.DataAccess.Migrations
 
             modelBuilder.Entity("EatParser.Entities.Entities.UserRole", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -230,7 +226,7 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,7 +236,8 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("RoleId");
+                    b.Property<string>("RoleId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -249,7 +246,7 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +256,8 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -268,7 +266,7 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -276,7 +274,8 @@ namespace EatParser.DataAccess.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -285,11 +284,11 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
-                    b.Property<int>("RoleId");
+                    b.Property<string>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -298,9 +297,9 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -313,7 +312,7 @@ namespace EatParser.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("EatParser.Entities.Entities.UserRole")
                         .WithMany()
@@ -321,7 +320,7 @@ namespace EatParser.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("EatParser.Entities.Entities.User")
                         .WithMany()
@@ -329,7 +328,7 @@ namespace EatParser.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("EatParser.Entities.Entities.User")
                         .WithMany()
@@ -337,7 +336,7 @@ namespace EatParser.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("EatParser.Entities.Entities.UserRole")
                         .WithMany()
@@ -350,7 +349,7 @@ namespace EatParser.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("EatParser.Entities.Entities.User")
                         .WithMany()

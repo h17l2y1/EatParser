@@ -8,13 +8,12 @@ namespace EatParser.Entities.Entities
 	public class BaseEntity : IBaseEntity
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
+		public string Id { get; set; }
 		public DateTime CreationDate { get; set; }
 
 		public BaseEntity()
 		{
+			Id = Guid.NewGuid().ToString();
 			CreationDate = DateTime.UtcNow;
 		}
 	}

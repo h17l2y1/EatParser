@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EatParser.Entities.Entities
 {
 	[Table("AspNetUsers")]
-	public class User : IdentityUser<int>, IBaseEntity
+	public class User : IdentityUser<string>, IBaseEntity
 	{
 		public string Password { get; set; }
 		public DateTime CreationDate { get; set; }
