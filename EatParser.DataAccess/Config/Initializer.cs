@@ -32,18 +32,9 @@ namespace EatParser.DataAccess.Config
                 {
                     restaurantList.Add(new Restaurant() { Name = type.ToString() });
                 }
-                try
-                {
-                    await context.AddRangeAsync(restaurantList);
-                    await context.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
 
-                    throw;
-                }
-
-
+                await context.AddRangeAsync(restaurantList);
+                await context.SaveChangesAsync();
             }
         }
 
