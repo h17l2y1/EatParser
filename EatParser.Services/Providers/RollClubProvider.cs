@@ -51,7 +51,7 @@ namespace EatParser.Services.Providers
 
 		private async Task<List<T>> ParsePage<T>(string url) where T : Product
 		{
-			IDocument document = await GetPage(url);
+			IDocument document = await GetDocument(url);
 			List<T> result = _rollClub.Parse<T>(document);
 
 			return result;

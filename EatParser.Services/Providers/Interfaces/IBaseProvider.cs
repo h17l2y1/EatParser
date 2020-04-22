@@ -5,6 +5,6 @@ namespace EatParser.Services.Providers.Interfaces
 {
 	public interface IBaseProvider
 	{
-		Task<IDocument> GetPage(string url);
+		Task<IDocument> GetDocument(string url);
 	}
 }

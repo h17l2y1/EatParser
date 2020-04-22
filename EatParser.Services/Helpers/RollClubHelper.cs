@@ -36,7 +36,7 @@ namespace EatParser.Services.Helpers
 			int? count = StringToInt(countStr);
 			string logo = GetLogoPath(RestaurantType.RollClub.ToString());
 
-			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.RollClub, logo);
+			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, ((int)RestaurantType.RollClub).ToString(), logo);
 
 			return product;
 		}
@@ -81,7 +81,7 @@ namespace EatParser.Services.Helpers
 			string logo = GetLogoPath(RestaurantType.RollClub.ToString());
 
 
-			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.RollClub, logo);
+			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, ((int)RestaurantType.RollClub).ToString(), logo);
 
 			return product;
 		}

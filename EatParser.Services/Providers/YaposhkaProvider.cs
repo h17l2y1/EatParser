@@ -26,36 +26,36 @@ namespace EatParser.Services.Providers
 			_yaposhka = yaposhka;
 		}
 
-		public async Task<List<Set>> GetSets()
+		public async Task<IEnumerable<Set>> GetSets()
 		{
-			List<Set> result = await ParsePage<Set>(SetsUrl);
+			IEnumerable<Set> result = await ParsePage<Set>(SetsUrl);
 			return result;
 		}
 
-		public async Task<List<Rol>> GetRols()
+		public async Task<IEnumerable<Rol>> GetRols()
 		{
-			List<Rol> result = await ParsePage<Rol>(RolsUrl);
+			IEnumerable<Rol> result = await ParsePage<Rol>(RolsUrl);
 			return result;
 		}
 
-		public async Task<List<Sushi>> GetSushi()
+		public async Task<IEnumerable<Sushi>> GetSushi()
 		{
-			List<Sushi> result = await ParsePage<Sushi>(SushiUrl);
+			IEnumerable<Sushi> result = await ParsePage<Sushi>(SushiUrl);
 			return result;
 		}
 
-		public async Task<List<Pizza>> GetPizza()
+		public async Task<IEnumerable<Pizza>> GetPizza()
 		{
-			List<Pizza> result = await ParsePage<Pizza>(PizzaUrl);
+			IEnumerable<Pizza> result = await ParsePage<Pizza>(PizzaUrl);
 			return result;
 		}
 
-		private async Task<List<T>> ParsePage<T>(string url) where T : Product
+		private async Task<IEnumerable<T>> ParsePage<T>(string url) where T : Product
 		{
-			IDocument document = await GetPage(url);
-			List<T> result = _yaposhka.Parse<T>(document);
+			IDocument document = await GetDocument(url);
+			//IEnumerable<T> result = _yaposhka.Parse<T>(document);
 
-			return result;
+			return null;
 		}
 
 	}

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EatParser.Entities.Entities
 {
 	[Table("AspNetRoles")]
-	public class UserRole : IdentityRole<int>
+	public class UserRole : IdentityRole<string>
 	{
 		public UserRole()
 		{

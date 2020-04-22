@@ -33,7 +33,7 @@ namespace EatParser.Services.Helpers
 			string desc = "";
 			string logo = GetLogoPath(RestaurantType.SushiPapa.ToString());
 
-			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImage, (int)RestaurantType.SushiPapa, logo);
+			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImage, ((int)RestaurantType.SushiPapa).ToString(), logo);
 
 			return product;
 		}

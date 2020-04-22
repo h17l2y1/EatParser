@@ -6,7 +6,7 @@ namespace EatParser.Entities.Entities.Interface
 	public interface IBaseEntity
 	{
 		[Key]
-		int Id { get; set; }
+		string Id { get; set; }
 		DateTime CreationDate { get; set; }
 	}
 }

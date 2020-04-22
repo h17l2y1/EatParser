@@ -13,6 +13,7 @@ namespace EatParser.Services.Providers
 	{
 		protected readonly IMafiaHelper _mafia;
 		protected readonly string _site = RestaurantType.Mafia.ToString();
+		private IDocument document;
 
 		public MafiaProvider(IHtmlLoaderHelper htmlLoaderHelper, IConfiguration сonfiguration, IMafiaHelper mafia)
 			: base(htmlLoaderHelper, сonfiguration)
@@ -25,36 +26,42 @@ namespace EatParser.Services.Providers
 			_mafia = mafia;
 		}
 
-		public async Task<List<Set>> GetSets()
+		public async Task All()
 		{
-			List<Set> result = await ParsePage<Set>(SetsUrl);
-			return result;
+			IEnumerable<Set> sets = await GetSets();
+			IEnumerable<Rol> rols = await GetRols();
+			IEnumerable<Sushi> sushi = await GetSushi();
+			IEnumerable<Pizza> pizzas = await GetPizza();
+
 		}
 
-		public async Task<List<Rol>> GetRols()
+		public async Task<IEnumerable<Set>> GetSets()
 		{
-			List<Rol> result = await ParsePage<Rol>(RolsUrl);
-			return result;
+			document = await GetDocument(SetsUrl);
+			//IEnumerable<Set> list = _mafia.Parse<Set>(document);
+			return null;
 		}
 
-		public async Task<List<Sushi>> GetSushi()
+		public async Task<IEnumerable<Rol>> GetRols()
 		{
-			List<Sushi> result = await ParsePage<Sushi>(SushiUrl);
-			return result;
+			document = await GetDocument(SetsUrl);
+			//IEnumerable<Rol> list = _mafia.Parse<Rol>(document);
+			return null;
 		}
 
-		public async Task<List<Pizza>> GetPizza()
+		public async Task<IEnumerable<Sushi>> GetSushi()
 		{
-			List<Pizza> result = await ParsePage<Pizza>(PizzaUrl);
-			return result;
+			document = await GetDocument(SetsUrl);
+			//IEnumerable<Sushi> list = _mafia.Parse<Sushi>(document);
+			return null;
 		}
 
-		private async Task<List<T>> ParsePage<T>(string url) where T : Product
+		public async Task<IEnumerable<Pizza>> GetPizza()
 		{
-			IDocument document = await GetPage(url);
-			List<T> result = _mafia.Parse<T>(document);
-
-			return result;
+			document = await GetDocument(SetsUrl);
+			//IEnumerable<Pizza> list = _mafia.Parse<Pizza>(document);
+			return null;
 		}
+
 	}
 }

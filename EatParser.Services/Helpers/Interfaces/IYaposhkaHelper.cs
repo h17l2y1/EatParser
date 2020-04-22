@@ -6,6 +6,6 @@ namespace EatParser.Services.Helpers.Interfaces
 {
 	public interface IYaposhkaHelper : IBaseHelper
 	{
-		List<T> Parse<T>(IDocument document) where T : Product;
+		IEnumerable<T> Parse<T>(IDocument document, string restourantId) where T : Product;
 	}
 }

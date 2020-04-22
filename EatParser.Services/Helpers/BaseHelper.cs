@@ -20,7 +20,7 @@ namespace EatParser.Services.Helpers
 			_replacements = SetDictionary();
 		}
 
-		public T CreatProduct<T>(string name, string desc, int? weight, int? count, int? price, string fullImg, int type, string logo) where T : Product
+		public T CreatProduct<T>(string name, string desc, int? weight, int? count, int? price, string fullImg, string restourantId, string logo) where T : Product
 		{
 			T product = (T)Activator.CreateInstance(typeof(T));
 
@@ -30,7 +30,7 @@ namespace EatParser.Services.Helpers
 			product.Count = count;
 			product.Price = price;
 			product.Image = fullImg;
-			product.RestaurantId = type;
+			product.RestaurantId = restourantId;
 			product.Logo = logo;
 
 			return product;
