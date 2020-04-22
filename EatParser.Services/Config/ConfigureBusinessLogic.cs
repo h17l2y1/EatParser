@@ -7,6 +7,7 @@ using EatParser.Services.Providers;
 using EatParser.Services.Providers.Interfaces;
 using EatParser.Services.Helpers.Interfaces;
 using EatParser.Services.Helpers;
+using AutoMapper;
 
 namespace EatParser.Services.Config
 {
@@ -14,17 +15,26 @@ namespace EatParser.Services.Config
 	{
 		public static void InjectBusinessLogicDependency(this IServiceCollection services, IConfiguration сonfiguration)
 		{
-			//Automapper setup
-			var config = new AutoMapper.MapperConfiguration(c =>
+			AddAutoMapper(services);
+			AddDependecies(services);
+
+			services.InjectDataAccessDependency(сonfiguration);
+		}
+
+		private static void AddAutoMapper(IServiceCollection services)
+		{
+			var config = new MapperConfiguration(c =>
 			{
 				c.AddProfile(new MapperProfile());
 			});
-			var mapper = config.CreateMapper();
+
+			IMapper mapper = config.CreateMapper();
+
 			services.AddSingleton(mapper);
+		}
 
-			services.InjectDataAccessDependency(сonfiguration);
-
-
+		private static void AddDependecies(IServiceCollection services)
+		{
 			// Services;
 			services.AddScoped<IGrabberService, GrabberService>();
 			services.AddScoped<IAccountService, AccountService>();
@@ -43,10 +53,9 @@ namespace EatParser.Services.Config
 			// Helpers;
 			services.AddScoped<IHtmlLoaderHelper, HtmlLoaderHelper>();
 			services.AddScoped<IYaposhkaHelper, YaposhkaHelper>();
-			services.AddScoped<IMafiaHelper , MafiaHelper>();
+			services.AddScoped<IMafiaHelper, MafiaHelper>();
 			services.AddScoped<ISushiPapaHelper, SushiPapaHelper>();
 			services.AddScoped<IRollClubHelper, RollClubHelper>();
-
 		}
 
 	}
