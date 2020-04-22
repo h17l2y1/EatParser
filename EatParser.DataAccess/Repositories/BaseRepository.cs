@@ -1,6 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
 using EatParser.DataAccess.Config;
 using EatParser.DataAccess.Repositories.Interfaces;
+using EatParser.Entities.Entities.Interface;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EatParser.DataAccess.Repositories
 {
-	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, IBaseEntity
 	{
 		protected readonly string _tableName = $"{ typeof(TEntity).Name }s";
 		protected readonly string _connectionString;
@@ -43,7 +44,7 @@ namespace EatParser.DataAccess.Repositories
 			}
 		}
 
-		public async Task AddRange(List<TEntity> entity)
+		public async Task AddRange(IEnumerable<TEntity> entity)
 		{
 			if (entity != null)
 			{

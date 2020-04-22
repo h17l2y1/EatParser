@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EatParser.Services.Providers.Interfaces
+namespace EatParser.Services.Helpers.Interfaces
 {
-	public interface IYaposhkaProvider : IBaseProvider
+	public interface IProviderFactory
 	{
 		Task<IEnumerable<Set>> GetSets();
 

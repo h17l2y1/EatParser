@@ -6,6 +6,6 @@ namespace EatParser.Services.Helpers.Interfaces
 {
 	public interface IMafiaHelper : IBaseHelper
 	{
-		List<T> Parse<T>(IDocument document) where T : Product;
+		IEnumerable<T> Parse<T>(IDocument document, string restaurantId) where T : Product;
 	}
 }

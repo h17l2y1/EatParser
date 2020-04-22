@@ -5,6 +5,7 @@ using EatParser.Entities.Entities;
 using EatParser.Services.Helpers.Interfaces;
 using EatParser.Services.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers
@@ -37,11 +38,26 @@ namespace EatParser.Services.Providers
 
 		//public int EndPoint { get; set; }
 
-		public async Task<IDocument> GetPage(string url)
+		//public async Task<IEnumerable<Set>> GetSets2()
+		//{
+		//	IEnumerable<Set> result = await ParsePage<Set>(SetsUrl);
+		//	return result;
+		//}
+
+		public async Task<IDocument> GetDocument(string url)
 		{
 			IHtmlDocument source = await _htmlLoaderHelper.GetPageSource(url);
 			IDocument document = await domParser.ParseDocumentAsync(source);
 			return document;
 		}
+
+		//private async Task<IEnumerable<T>> ParsePage<T>(string url) where T : Product
+		//{
+		//	IDocument document = await GetPage(url);
+		//	IEnumerable<T> result = _mafia.Parse<T>(document);
+
+		//	return result;
+		//}
+
 	}
 }

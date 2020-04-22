@@ -1,5 +1,4 @@
-﻿using EatParser.Entities.Entities.Interface;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EatParser.DataAccess.Repositories.Interfaces
@@ -12,7 +11,7 @@ namespace EatParser.DataAccess.Repositories.Interfaces
 
 		Task Add(TEntity item);
 
-		Task AddRange(List<TEntity> entity);
+		Task AddRange(IEnumerable<TEntity> entity);
 
 		Task Update(TEntity entity);
 

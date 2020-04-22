@@ -29,6 +29,7 @@ namespace EatParser.DataAccess.Config
 			{
 				options.UseSqlServer(connectionString, x => x.MigrationsAssembly(migrationsAssembly));
 			}, ServiceLifetime.Scoped);
+			services.Configure<ConnectionStrings>(x => configuration.GetSection("ConnectionStrings").Bind(x));
 
 		}
 
@@ -59,6 +60,7 @@ namespace EatParser.DataAccess.Config
 			services.AddTransient<ISetRepository, SetRepository>();
 			services.AddTransient<ISushiRepository, SushiRepository>();
 			services.AddTransient<IPizzaRepository, PizzaRepository>();
+			services.AddTransient<IRestaurantRepository, RestaurantRepository>();
 		}
 
 	}

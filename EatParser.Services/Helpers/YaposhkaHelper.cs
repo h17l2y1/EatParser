@@ -9,19 +9,18 @@ namespace EatParser.Services.Helpers
 {
 	public class YaposhkaHelper : BaseHelper, IYaposhkaHelper
 	{
-		public List<T> Parse<T>(IDocument document) where T : Product
+		public IEnumerable<T> Parse<T>(IDocument document, string restourantId) where T : Product
 		{
 			IHtmlCollection<IElement> iElementList = document.QuerySelectorAll("div.product-container");
 
-			List<T> products = Enumerable
+			IEnumerable<T> products = Enumerable
 				.Range(0, iElementList.Count())
-				.Select(i => CreateProduct<T>(iElementList[i]))
-				.ToList();
+				.Select(i => CreateProduct<T>(iElementList[i], restourantId));
 
 			return products;
 		}
 
-		private T CreateProduct<T>(IElement td) where T : Product
+		private T CreateProduct<T>(IElement td, string restourantId) where T : Product
 		{
 			string fullImage = GetData(td, "img.photo.image.lazy.lazy-loading.lazy-blur", "data-original");
 			string cropImage = GetData(td, "source.photo.image.lazy.lazy-loading.lazy-blur", "data-original");
@@ -37,7 +36,7 @@ namespace EatParser.Services.Helpers
 			string logo = GetLogoPath(RestaurantType.Yaposhka.ToString());
 
 
-			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, (int)RestaurantType.Yaposhka, logo);
+			T product = CreatProduct<T>(name, desc, weight, count, price, fullImage, restourantId, logo);
 
 			return product;
 		}

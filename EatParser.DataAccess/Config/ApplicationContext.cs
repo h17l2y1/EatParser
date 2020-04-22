@@ -22,17 +22,6 @@ namespace EatParser.DataAccess.Config
 		public DbSet<Pizza> Pizzas { get; set; }
 
 		public DbSet<Restaurant> Restaurants { get; set; }
-
-		//protected override void OnModelCreating(ModelBuilder builder)
-		//{
-		//	var init = new AutoComplete();
-
-		//	var list = init.CreateRestaurant().ToArray();
-
-		//	builder.Entity<Restaurant>().HasData(list);
-
-		//	base.OnModelCreating(builder);
-		//}
 	}
 
 }

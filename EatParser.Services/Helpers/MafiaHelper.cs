@@ -10,19 +10,18 @@ namespace EatParser.Services.Helpers
 {
 	public class MafiaHelper : BaseHelper, IMafiaHelper
 	{
-		public List<T> Parse<T>(IDocument document) where T : Product
+		public IEnumerable<T> Parse<T>(IDocument document, string restaurantId) where T : Product
 		{
 			IHtmlCollection<IElement> iElementList = document.QuerySelectorAll("div.product-item");
 
-			List<T> products = Enumerable
+			IEnumerable<T> products = Enumerable
 				.Range(0, iElementList.Count())
-				.Select(i => CreateProduct<T>(iElementList[i]))
-				.ToList();
+				.Select(i => CreateProduct<T>(iElementList[i], restaurantId));
 
 			return products;
 		}
 
-		private T CreateProduct<T>(IElement td) where T : Product
+		private T CreateProduct<T>(IElement td, string restaurantId) where T : Product
 		{
 			IElement imgElement = td.QuerySelector("a.product-img");
 			IElement nameElemnt = td.QuerySelector("div.product-title");
@@ -39,7 +38,7 @@ namespace EatParser.Services.Helpers
 			int? price = StringToInt(priceStr);
 			string logo = GetLogoPath(RestaurantType.Mafia.ToString());
 
-			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImg, (int)RestaurantType.Mafia, logo);
+			T product = CreatProduct<T>(name, desc, set.Weight, set.Count, price, fullImg, restaurantId, logo);
 
 			return product;
 		}
