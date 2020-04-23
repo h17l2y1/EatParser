@@ -5,7 +5,7 @@ namespace EatParser.DataAccess.Repositories.Interfaces
 {
 	public interface IBaseRepository<TEntity> where TEntity : class
 	{
-		Task<TEntity> Get(int id);
+		Task<TEntity> Get(string id);
 
 		Task<IEnumerable<TEntity>> GetAll();
 
@@ -15,6 +15,6 @@ namespace EatParser.DataAccess.Repositories.Interfaces
 
 		Task Update(TEntity entity);
 
-		Task Remove(int id);
+		Task Remove(string id);
 	}
 }

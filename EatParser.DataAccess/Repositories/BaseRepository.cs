@@ -25,7 +25,7 @@ namespace EatParser.DataAccess.Repositories
 			_connectionString = connection.DefaultConnection;
 		}
 
-		public async Task<TEntity> Get(int id)
+		public async Task<TEntity> Get(string id)
 		{
 			TEntity entity = await Connection.GetAsync<TEntity>(id);
 			return entity;
@@ -60,7 +60,7 @@ namespace EatParser.DataAccess.Repositories
 			}
 		}
 
-		public async Task Remove(int id)
+		public async Task Remove(string id)
 		{
 			var entity = await Connection.GetAsync<TEntity>(id);
 			Connection.Delete(entity);
