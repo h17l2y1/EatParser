@@ -65,8 +65,9 @@ namespace EatParser.Services.Services
 			{
 				IEnumerable<Set> sets = await providers[i].GetSets();
 
-				Set set = sets.FirstOrDefault();
-				await _setRepository.Add(set);
+				//Set set = sets.FirstOrDefault();
+				//await _setRepository.AddOneDapper(set);
+				//await _setRepository.AddOneDapperContrib(set);
 
 
 				IEnumerable<Rol> rols = await providers[i].GetRols();

@@ -17,7 +17,7 @@ namespace EatParser.DataAccess.Config
 		{
 			AddDbContext(services, configuration);
 			AddIdentity(services);
-			//Initialize(services);
+			Initialize(services);
 			AddDependecies(services);
 		}
 

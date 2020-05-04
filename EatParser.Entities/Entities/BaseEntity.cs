@@ -6,7 +6,6 @@ namespace EatParser.Entities.Entities
 {
 	public class BaseEntity : IBaseEntity
 	{
-		[Key]
 		[ExplicitKey]
 		public string Id { get; set; }
 		public DateTime CreationDate { get; set; }
