@@ -21,7 +21,6 @@ namespace EatParser.Services.Providers
 			RolsUrl = _сonfiguration.GetSection($"Site:{_site}:Rols").Value;
 			SushiUrl = _сonfiguration.GetSection($"Site:{_site}:Sushi").Value;
 			PizzaUrl = _сonfiguration.GetSection($"Site:{_site}:Pizza").Value;
-			//Pizza2Url = _сonfiguration.GetSection($"Site:{_site}:Pizza2").Value;
 
 			_yaposhka = yaposhka;
 		}

@@ -14,7 +14,7 @@
 
 		public string Image { get; set; }
 
-		public int RestaurantId { get; set; }
+		public string RestaurantId { get; set; }
 
 		public string Logo { get; set; }
 	}

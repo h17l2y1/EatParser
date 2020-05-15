@@ -56,40 +56,29 @@ namespace EatParser.Services.Services
 
 		public async Task GrabbAllRestaurant()
 		{
-			providers = new IProviderFactory[] {
-				new MafiaProviderFactory(_htmlLoaderHelper, _сonfiguration, _mafiaHelper, await GetRestaurantByName(RestaurantType.Mafia.ToString())),
-				new YaposhkaProviderFactory(_htmlLoaderHelper, _сonfiguration, _yaposhkaHelper, await GetRestaurantByName(RestaurantType.Yaposhka.ToString()))
-			};
+			await CreateProviders();
 
 			for (int i = 0; i < providers.Length; i++)
 			{
 				IEnumerable<Set> sets = await providers[i].GetSets();
-
-				//Set set = sets.FirstOrDefault();
-				//await _setRepository.AddOneDapper(set);
-				//await _setRepository.AddOneDapperContrib(set);
-
-
 				IEnumerable<Rol> rols = await providers[i].GetRols();
 				IEnumerable<Sushi> sushi = await providers[i].GetSushi();
 				IEnumerable<Pizza> pizza = await providers[i].GetPizza();
 
 				await SaveAll(sets, rols, sushi, pizza);
 			}
-
-			//await GrabbMafia();
-			//await GrabbYaposhka();
-			//await GrabbSushiPapa();
-			//await GrabbRollClub();
 		}
 
-		//private void CreateProviders()
-		//{
-		//	providers = new IProviderFactory[] {
-		//		new MafiaProviderFactory(_htmlLoaderHelper, _сonfiguration, _mafiaHelper),
-		//		new YaposhkaProviderFactory(_htmlLoaderHelper, _сonfiguration, _yaposhkaHelper),
-		//	};
-		//}
+		private async Task CreateProviders()
+		{
+			providers = new IProviderFactory[] {
+				new MafiaProviderFactory(_htmlLoaderHelper, _сonfiguration, _mafiaHelper, await GetRestaurantByName(RestaurantType.Mafia.ToString())),
+				new YaposhkaProviderFactory(_htmlLoaderHelper, _сonfiguration, _yaposhkaHelper, await GetRestaurantByName(RestaurantType.Yaposhka.ToString())),
+				//new SushiPapaProviderFactory(_htmlLoaderHelper, _сonfiguration, _sushiPapaProvider, await GetRestaurantByName(RestaurantType.SushiPapa.ToString())),
+				//new RollClubProviderFactory(_htmlLoaderHelper, _сonfiguration, _rollClubProvider, await GetRestaurantByName(RestaurantType.RollClub.ToString()))
+
+			};
+		}
 
 		private async Task<Restaurant> GetRestaurantByName(string name)
 		{

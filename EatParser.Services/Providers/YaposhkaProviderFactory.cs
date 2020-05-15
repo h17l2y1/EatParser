@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EatParser.Services.Providers
 {
-	class YaposhkaProviderFactory : BaseProvider, IProviderFactory
+	public class YaposhkaProviderFactory : BaseProvider, IProviderFactory
 	{
 		protected readonly IYaposhkaHelper _yaposhka;
 		private IDocument document;
@@ -21,7 +21,6 @@ namespace EatParser.Services.Providers
 			RolsUrl = _сonfiguration.GetSection($"Site:{restaurant.Name}:Rols").Value;
 			SushiUrl = _сonfiguration.GetSection($"Site:{restaurant.Name}:Sushi").Value;
 			PizzaUrl = _сonfiguration.GetSection($"Site:{restaurant.Name}:Pizza").Value;
-			//Pizza2Url = _сonfiguration.GetSection($"Site:{_site}:Pizza2").Value;
 
 			_yaposhka = yaposhka;
 		}
