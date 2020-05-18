@@ -15,7 +15,7 @@ export class SetsViewItem implements ProductView {
     count?: number;
     price?: number;
     image: string;
-    restaurantId: number;
+    restaurantId: string;
     logo: string;
 }
 

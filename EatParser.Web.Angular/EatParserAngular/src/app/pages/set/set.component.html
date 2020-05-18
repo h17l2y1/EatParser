@@ -8,11 +8,11 @@
     </svg>
   </div>
 </div>
-  
+
 
 <form>
   <div class="func-container">
-    
+
     <div class="func sel sel--black-panther" *ngIf="sortDropDownForm">
       <form [formGroup]="sortDropDownForm">
         <select formControlName="sortList" class="form-control" (ngModelChange)="multiFilter()" name="select-profession" id="select-profession">
@@ -25,7 +25,7 @@
 
     <div class="func" *ngIf="restDropDownForm">
       <form [formGroup]="restDropDownForm">
-        <select formControlName="restaurauntList" class="form-control" (ngModelChange)="multiFilter()">
+        <select formControlName="restaurantList" class="form-control" (ngModelChange)="multiFilter()">
           <option *ngFor="let item of typeDropDown" [ngValue]="item">
             {{item.name}}
           </option>

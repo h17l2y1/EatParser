@@ -68,36 +68,36 @@ export class RolComponent implements OnInit, OnDestroy {
 
   public multiFilter(): void {
     if (!this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.rolView = _.cloneDeep(this.response.rols);
         this.sort();
         return;
       }
-      this.rolView = this.response.rols.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+      this.rolView = this.response.rols.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       this.sort();
       return;
     }
 
     if (this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.rolView = this.response.rols.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase()));
         this.sort();
         return;
       }
       this.rolView = this.response.rols.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase())
-        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+        && rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       this.sort();
       return;
     }
 
     if (this.priceRange && !this.text) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.rolView = this.response.rols.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper);
         this.sort();
         return;
       }
       this.rolView = this.response.rols.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper
-        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+        && rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       this.sort();
       return;
     }
@@ -105,7 +105,7 @@ export class RolComponent implements OnInit, OnDestroy {
     this.rolView = this.response.rols.filter(
       rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
       rol.name.toLowerCase().includes(this.text.toLowerCase()) &&
-      rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id
+      rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id
     );
     this.sort();
   }
@@ -128,7 +128,7 @@ export class RolComponent implements OnInit, OnDestroy {
     this.getRestauraunts(this.response.rols);
 
     this.restDropDownForm = new FormGroup({
-      restaurauntList: new FormControl(this.typeDropDown[0]),
+      restaurantList: new FormControl(this.typeDropDown[0]),
     });
   }
 

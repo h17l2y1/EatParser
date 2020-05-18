@@ -68,35 +68,35 @@ export class PizzaComponent implements OnInit, OnDestroy {
 
   public filter(): void {
     if (!this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.pizzaView = _.cloneDeep(this.response.pizzas);
         return;
       }
-      this.pizzaView = this.response.pizzas.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+      this.pizzaView = this.response.pizzas.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       return;
     }
 
     if (this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.pizzaView = this.response.pizzas.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase()));
         return;
       }
       this.pizzaView = this.response.pizzas.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase())
-        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+        && rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       return;
     }
 
     if (this.priceRange && !this.text) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.pizzaView = this.response.pizzas.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper);
         return;
       }
       this.pizzaView = this.response.pizzas.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper
-        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+        && rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       return;
     }
 
-    if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+    if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
       this.pizzaView = this.response.pizzas.filter(
         rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
         rol.name.toLowerCase().includes(this.text.toLowerCase()));
@@ -106,7 +106,7 @@ export class PizzaComponent implements OnInit, OnDestroy {
     this.pizzaView = this.response.pizzas.filter(
       rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
       rol.name.toLowerCase().includes(this.text.toLowerCase()) &&
-      rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id
+      rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id
     );
   }
 
@@ -133,7 +133,7 @@ export class PizzaComponent implements OnInit, OnDestroy {
     this.getRestauraunts(this.response.pizzas);
 
     this.restDropDownForm = new FormGroup({
-      restaurauntList: new FormControl(this.typeDropDown[0]),
+      restaurantList: new FormControl(this.typeDropDown[0]),
     });
   }
 

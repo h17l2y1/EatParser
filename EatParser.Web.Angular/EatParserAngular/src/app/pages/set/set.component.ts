@@ -55,19 +55,19 @@ export class SetComponent implements OnInit, OnDestroy {
   }
 
   public getClass(set: SetsViewItem): string {
-    if (set.restaurantId === 1) {
-      return 'card-heared mafia';
+    if (set.restaurantId === 'e852dc88-be1c-4c75-829b-087b492c3e35') {
+      return 'card-header mafia';
     }
-    if (set.restaurantId === 2) {
-      return 'card-heared yaposhka';
+    if (set.restaurantId === '461881d3-a45d-48a8-b70f-2c6bbedc9d69') {
+      return 'card-header yaposhka';
     }
-    if (set.restaurantId === 3) {
-      return 'card-heared sushiPapa';
+    if (set.restaurantId === '097d5c06-dcae-4fb0-b7c5-5bee485ae601') {
+      return 'card-header sushiPapa';
     }
-    if (set.restaurantId === 4) {
-      return 'card-heared rollClub';
+    if (set.restaurantId === 'c27bfca8-afb6-4e89-aca4-3cefb2ac0307') {
+      return 'card-header rollClub';
     }
-    return 'card-heared';
+    return 'card-header';
   }
 
   private getAllSets() {
@@ -75,7 +75,7 @@ export class SetComponent implements OnInit, OnDestroy {
       this.response = _.cloneDeep(response);
       this.setPriceRange(response.sets);
       this.setView = response.sets;
-      this.initRestaurauntDropDown();
+      this.initRestaurantDropDown();
       this.multiFilter();
     });
   }
@@ -92,35 +92,35 @@ export class SetComponent implements OnInit, OnDestroy {
 
   public filter(): void {
     if (!this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.setView = _.cloneDeep(this.response.sets);
         return;
       }
-      this.setView = this.response.sets.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+      this.setView = this.response.sets.filter(rol => rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       return;
     }
 
     if (this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.setView = this.response.sets.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase()));
         return;
       }
       this.setView = this.response.sets.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase())
-        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+        && rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       return;
     }
 
     if (this.priceRange && !this.text) {
-      if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
         this.setView = this.response.sets.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper);
         return;
       }
       this.setView = this.response.sets.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper
-        && rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id);
+        && rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id);
       return;
     }
 
-    if (this.restDropDownForm.controls.restaurauntList.value.id === 0) {
+    if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
       this.setView = this.response.sets.filter(
         rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
         rol.name.toLowerCase().includes(this.text.toLowerCase()));
@@ -130,7 +130,7 @@ export class SetComponent implements OnInit, OnDestroy {
     this.setView = this.response.sets.filter(
       rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
       rol.name.toLowerCase().includes(this.text.toLowerCase()) &&
-      rol.restaurantId === this.restDropDownForm.controls.restaurauntList.value.id
+      rol.restaurantId === this.restDropDownForm.controls.restaurantList.value.id
     );
   }
 
@@ -153,15 +153,15 @@ export class SetComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initRestaurauntDropDown(): void {
-    this.getRestauraunts(this.response.sets);
+  private initRestaurantDropDown(): void {
+    this.getRestaurants(this.response.sets);
 
     this.restDropDownForm = new FormGroup({
-      restaurauntList: new FormControl(this.typeDropDown[0]),
+      restaurantList: new FormControl(this.typeDropDown[0]),
     });
   }
 
-  private getRestauraunts(sets: SetsViewItem[]): void {
+  private getRestaurants(sets: SetsViewItem[]): void {
     this.typeDropDown = new Array<Resrauraunt>();
     const mappedArray = sets.map(x => x.restaurantId);
     const typesArray = mappedArray.filter((n, i) => mappedArray.indexOf(n) === i);

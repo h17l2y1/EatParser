@@ -15,5 +15,5 @@ export class SushiViewItem implements ProductView {
     count?: number;
     price?: number;
     image: string;
-    restaurantId: number;
+    restaurantId: string;
 }
