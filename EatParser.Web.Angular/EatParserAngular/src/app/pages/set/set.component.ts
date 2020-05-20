@@ -32,7 +32,7 @@ export class SetComponent implements OnInit, OnDestroy {
 
   public isYaposhka = false;
   public isMafia = true;
-
+  public rest: Resrauraunt;
 
 
 
@@ -90,9 +90,14 @@ export class SetComponent implements OnInit, OnDestroy {
     this.multiFilter();
   }
 
+  public multiFilter(): void {
+    this.filter();
+    this.sort();
+  }
+
   public filter(): void {
     if (!this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
+      if (!this.restDropDownForm.controls.restaurantList.value.id) {
         this.setView = _.cloneDeep(this.response.sets);
         return;
       }
@@ -101,7 +106,7 @@ export class SetComponent implements OnInit, OnDestroy {
     }
 
     if (this.text && !this.priceRange) {
-      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
+      if (!this.restDropDownForm.controls.restaurantList.value.id) {
         this.setView = this.response.sets.filter(rol => rol.name.toLowerCase().includes(this.text.toLowerCase()));
         return;
       }
@@ -111,7 +116,7 @@ export class SetComponent implements OnInit, OnDestroy {
     }
 
     if (this.priceRange && !this.text) {
-      if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
+      if (!this.restDropDownForm.controls.restaurantList.value.id) {
         this.setView = this.response.sets.filter(rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper);
         return;
       }
@@ -120,7 +125,7 @@ export class SetComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.restDropDownForm.controls.restaurantList.value.id === 0) {
+    if (!this.restDropDownForm.controls.restaurantList.value.id) {
       this.setView = this.response.sets.filter(
         rol => rol.price > this.priceRange.lower && rol.price < this.priceRange.upper &&
         rol.name.toLowerCase().includes(this.text.toLowerCase()));
@@ -134,11 +139,6 @@ export class SetComponent implements OnInit, OnDestroy {
     );
   }
 
-  private multiFilter(): void {
-    this.filter();
-    this.sort();
-  }
-
   public sort(): void {
     const param = this.sortDropDownForm.controls.sortList.value[0];
     const type = this.sortDropDownForm.controls.sortList.value[1];
@@ -147,6 +147,7 @@ export class SetComponent implements OnInit, OnDestroy {
 
   private initSortDropDown(): void {
     this.sortDropDown = [['price', 'desc'], ['price', 'asc'], ['count', 'desc'], ['count', 'asc']];
+    //this.sortDropDown = [['Цена', 'по позрастанию'], ['Цена', 'по убыванию'], ['Кол-во', 'по позрастанию'], ['Кол-во', 'по убыванию']];
 
     this.sortDropDownForm = new FormGroup({
       sortList: new FormControl(this.sortDropDown[0]),
@@ -164,10 +165,11 @@ export class SetComponent implements OnInit, OnDestroy {
   private getRestaurants(sets: SetsViewItem[]): void {
     this.typeDropDown = new Array<Resrauraunt>();
     const mappedArray = sets.map(x => x.restaurantId);
-    const typesArray = mappedArray.filter((n, i) => mappedArray.indexOf(n) === i);
+    const uniqueResraurauntId = mappedArray.filter((n, i) => mappedArray.indexOf(n) === i);
 
-    for (let i = 0; i < typesArray.length + 1; i++) {
-      this.typeDropDown.push(new Resrauraunt(i, RestaurantType[i]));
+    this.typeDropDown.push(new Resrauraunt(undefined, RestaurantType[0]));
+    for (let i = 0; i < uniqueResraurauntId.length; i++) {
+      this.typeDropDown.push(new Resrauraunt(uniqueResraurauntId[i], RestaurantType[i + 1]));
     }
 
   }

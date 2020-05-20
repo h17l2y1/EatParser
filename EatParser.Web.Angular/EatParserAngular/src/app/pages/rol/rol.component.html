@@ -13,7 +13,7 @@
 
     <div class="func" *ngIf="restDropDownForm">
       <form [formGroup]="restDropDownForm">
-        <select formControlName="restaurauntList" class="form-control" (ngModelChange)="multiFilter()">
+        <select formControlName="restaurantList" class="form-control" (ngModelChange)="multiFilter()">
           <option *ngFor="let item of typeDropDown" [ngValue]="item">
             {{item.name}}
           </option>
@@ -24,7 +24,7 @@
     <div class="func slider1">
       <app-slider *ngIf="response"></app-slider>
     </div>
- 
+
     <div class="func">
       <input type="search" placeholder="Search" (keyup)="setText($event.target.value)">
     </div>

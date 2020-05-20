@@ -13,7 +13,7 @@
 
     <div class="func" *ngIf="restDropDownForm">
       <form [formGroup]="restDropDownForm">
-        <select formControlName="restaurauntList" class="form-control" (ngModelChange)="multiFilter()">
+        <select formControlName="restaurantList" class="form-control" (ngModelChange)="multiFilter()">
           <option *ngFor="let item of typeDropDown" [ngValue]="item">
             {{item.name}}
           </option>
